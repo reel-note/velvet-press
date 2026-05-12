@@ -78,9 +78,7 @@
     "ダスッ！"
   ],
   "fanzaUrl": "https://video.dmm.co.jp/av/content/?id=dass",
-  "services": [
-    "fanza"
-  ],
+  "services": ["fanza"],
   "issue": "2026-05",
   "posterStyle": 1
 }
