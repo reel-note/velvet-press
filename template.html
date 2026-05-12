@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELVET&PRESS — アダルト作品レビューマガジン [R18]</title>
+<meta name="rating" content="adult">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#1A1419;
+    --paper-2:#231B22;
+    --ink:#F4ECDD;
+    --ink-soft:#A89889;
+    --red:#D8344A;
+    --red-deep:#8E1F30;
+    --gold:#C9A664;
+    --velvet:#5B1F3B;
+    --rose:#E97DA0;
+    --line:rgba(244,236,221,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--paper);color:var(--ink);font-family:"DM Sans","Shippori Mincho",sans-serif;-webkit-font-smoothing:antialiased;}
+  body{
+    min-height:100vh;
+    background-image:
+      radial-gradient(rgba(244,236,221,.025) 1px, transparent 1px),
+      radial-gradient(rgba(244,236,221,.015) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 1px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ============ AGE GATE ============ */
+  .age-gate{
+    position:fixed;inset:0;z-index:9999;
+    background:#0A070A;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .age-gate.is-hidden{display:none;}
+  .age-gate-inner{
+    max-width:480px;width:100%;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    padding:36px 28px;
+    text-align:center;
+    box-shadow:0 0 60px rgba(216,52,74,.15);
+  }
+  .age-gate-r18{
+    display:inline-block;
+    font-family:"Anton",sans-serif;font-size:14px;letter-spacing:.18em;
+    color:var(--red);
+    border:2px solid var(--red);
+    padding:6px 14px 5px;
+    margin-bottom:20px;
+  }
+  .age-gate-title{
+    font-family:"Anton",sans-serif;
+    font-size:36px;letter-spacing:-.01em;line-height:1;margin-bottom:8px;
+    color:var(--ink);text-transform:uppercase;
+  }
+  .age-gate-title em{color:var(--red);font-style:italic;font-family:"Fraunces",serif;font-weight:900;}
+  .age-gate-sub{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.2em;
+    color:var(--ink-soft);text-transform:uppercase;margin-bottom:24px;
+  }
+  .age-gate-text{
+    font-family:"Shippori Mincho",serif;font-size:14px;line-height:1.8;
+    color:var(--ink);margin-bottom:24px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;
+  }
+  .age-gate-text strong{color:var(--gold);}
+  .age-gate-q{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.1em;
+    margin-bottom:14px;color:var(--ink);
+  }
+  .age-gate-buttons{display:flex;gap:12px;justify-content:center;}
+  .age-btn{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;cursor:pointer;
+    padding:13px 24px 11px;border:1.5px solid var(--ink);
+    transition: all .2s ease;
+  }
+  .age-btn.yes{background:var(--ink);color:var(--paper);}
+  .age-btn.yes:hover{background:var(--red);border-color:var(--red);color:var(--ink);transform:translateY(-2px);box-shadow:3px 3px 0 var(--red-deep);}
+  .age-btn.no{background:transparent;color:var(--ink-soft);border-color:var(--ink-soft);}
+  .age-btn.no:hover{color:var(--ink);border-color:var(--ink);}
+  .age-gate-foot{
+    margin-top:18px;font-family:"Fraunces",serif;font-style:italic;
+    font-size:11px;color:var(--ink-soft);
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding:14px 24px 12px;
+    background:var(--paper);
+    position:sticky;top:0;z-index:50;
+  }
+  .masthead-top{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:"Anton",sans-serif;letter-spacing:.05em;
+    text-transform:uppercase;font-size:11px;color:var(--ink-soft);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+  }
+  .masthead-top .meta-l, .masthead-top .meta-r{display:flex;gap:14px;align-items:center;}
+  .masthead-top .dot{width:6px;height:6px;background:var(--red);border-radius:50%;display:inline-block;margin-right:6px;vertical-align:1px;}
+  .masthead-top .r18-badge{
+    background:var(--red);color:var(--ink);
+    padding:2px 7px 1px;
+    font-size:10px;letter-spacing:.1em;
+  }
+  .masthead-title{
+    font-family:"Anton",sans-serif;
+    font-size:clamp(48px, 11vw, 138px);
+    line-height:.85;letter-spacing:-0.02em;
+    text-align:center;
+    color:var(--ink);
+    text-transform:uppercase;
+    margin:6px 0 4px;
+  }
+  .masthead-title .amp{
+    color:var(--red);
+    font-family:"Fraunces",serif;
+    font-style:italic;font-weight:900;
+    padding:0 .04em;
+  }
+  .masthead-bottom{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-top:1px solid var(--line);padding-top:8px;
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:13px;color:var(--ink-soft);
+  }
+  .masthead-bottom .tagline{font-weight:400;}
+  .masthead-bottom .issue{font-family:"Anton",sans-serif;font-style:normal;letter-spacing:.08em;font-size:11px;color:var(--ink);}
+
+  /* ============ ISSUE SELECTOR ============ */
+  .masthead-top .meta-r{position:relative;}
+  .issue-selector{
+    background:none;border:none;padding:0;cursor:pointer;
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink-soft);
+    display:inline-flex;align-items:center;gap:5px;
+    transition:color .15s ease;
+  }
+  .issue-selector:hover{color:var(--ink);}
+  .issue-selector .chevron{font-size:9px;margin-top:1px;transition:transform .2s ease;}
+  .issue-selector.is-open .chevron{transform:rotate(180deg);}
+  .issue-dropdown{
+    position:absolute;right:0;top:calc(100% + 6px);
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    z-index:100;min-width:220px;
+  }
+  .issue-dropdown[hidden]{display:none;}
+  .issue-dropdown button{
+    display:block;width:100%;text-align:left;
+    background:none;border:none;
+    border-bottom:1px solid var(--line);
+    padding:11px 16px 9px;
+    font-family:"Anton",sans-serif;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink);cursor:pointer;
+    transition:background .15s ease;
+  }
+  .issue-dropdown button:last-child{border-bottom:none;}
+  .issue-dropdown button:hover{background:var(--velvet);}
+  .issue-dropdown button.is-active{background:var(--ink);color:var(--paper);}
+  .issue-dropdown .issue-divider{border-bottom:2px solid var(--ink);}
+
+  /* ============ FILTER BAR ============ */
+  .filter-bar{
+    display:flex;flex-direction:column;gap:10px;
+    padding:18px 24px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;}
+  .filter-row .label{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);margin-right:4px;
+  }
+  .filter-btn{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:8px 16px 7px;border:1.5px solid var(--ink);
+    background:var(--paper);color:var(--ink);
+    border-radius:999px;cursor:pointer;
+    transition: all .18s ease;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .filter-btn .count{
+    font-family:"DM Sans",sans-serif;font-size:10px;font-weight:700;
+    background:var(--ink);color:var(--paper);
+    padding:2px 6px;border-radius:999px;letter-spacing:0;
+  }
+  .filter-btn:hover{transform:translateY(-1px);box-shadow:3px 3px 0 var(--red-deep);}
+  .filter-btn.is-active{background:var(--ink);color:var(--paper);}
+  .filter-btn.is-active .count{background:var(--gold);color:var(--paper);}
+  .filter-btn[data-band="90"]:not(.is-active):hover{background:var(--red);color:var(--ink);border-color:var(--red);}
+  .filter-btn[data-band="80"]:not(.is-active):hover{background:var(--gold);color:var(--paper);border-color:var(--gold);}
+  .filter-btn[data-band="70"]:not(.is-active):hover{background:var(--velvet);color:var(--ink);border-color:var(--velvet);}
+
+  .genre-btn{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:6px 12px 5px;border:1.5px solid var(--ink);
+    background:var(--paper);color:var(--ink);
+    border-radius:999px;cursor:pointer;
+    transition: all .18s ease;
+  }
+  .genre-btn:hover{transform:translateY(-1px);box-shadow:2px 2px 0 var(--velvet);}
+  .genre-btn.is-active{background:var(--velvet);color:var(--ink);border-color:var(--velvet);}
+
+  /* ============ GRID ============ */
+  .grid-section{padding:28px 24px 80px;}
+  .grid-section-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:24px;
+  }
+  .grid-section-head h2{font-family:"Fraunces",serif;font-weight:900;font-size:22px;letter-spacing:-.01em;}
+  .grid-section-head h2 em{font-style:italic;color:var(--red);}
+  .grid-section-head .count-text{font-family:"Anton",sans-serif;font-size:12px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;}
+
+  .poster-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:32px 14px;
+  }
+  @media (min-width:768px){
+    .poster-grid{grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:40px 18px;}
+  }
+
+  .poster-card{
+    cursor:pointer;
+    display:flex;flex-direction:column;gap:6px;
+    opacity:0;transform:translateY(8px);
+    animation:rise .5s ease forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+  .poster{
+    aspect-ratio: 2/3;
+    position:relative;overflow:hidden;
+    border:1.5px solid var(--ink);
+    transition: transform .25s ease, box-shadow .25s ease;
+    display:flex;flex-direction:column;
+  }
+  .poster-card:hover .poster{transform:translateY(-4px);box-shadow:6px 6px 0 var(--velvet);}
+  .poster-card:hover .score-badge{transform:scale(1.08);}
+
+  .score-badge{
+    position:absolute;top:8px;right:8px;z-index:3;
+    background:var(--paper);color:var(--ink);
+    border:1.5px solid var(--ink);
+    width:50px;height:50px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",serif;font-weight:900;font-size:22px;
+    letter-spacing:-.02em;line-height:1;
+    transition: transform .25s ease;
+  }
+  .score-badge.gold{background:var(--gold);color:var(--paper);}
+  .score-badge.red{background:var(--red);color:var(--ink);}
+
+  /* ============ ABSTRACT POSTER DESIGNS (typography & color blocks only) ============ */
+  .p-vlv01{background:linear-gradient(180deg,#3D1428 0%,#1A0814 100%);color:var(--gold);justify-content:flex-end;padding:16px;}
+  .p-vlv01::before{content:"";position:absolute;top:0;left:0;right:0;height:30%;background:repeating-linear-gradient(90deg,transparent 0,transparent 8px,rgba(201,166,100,.1) 8px,rgba(201,166,100,.1) 9px);}
+  .p-vlv01 .num{font-family:"Bebas Neue",sans-serif;font-size:32px;letter-spacing:.1em;line-height:1;}
+  .p-vlv01 .ttl{font-family:"Shippori Mincho",serif;font-weight:700;font-size:16px;letter-spacing:.1em;line-height:1.2;margin-top:4px;}
+  .p-vlv01 .sub{font-family:"Fraunces",serif;font-style:italic;font-size:9px;letter-spacing:.15em;margin-top:6px;color:#7a5a40;}
+
+  .p-vlv02{background:#0A0814;color:var(--gold);justify-content:center;align-items:center;padding:14px;}
+  .p-vlv02 .frame{border:1px solid var(--gold);padding:18px 12px;text-align:center;}
+  .p-vlv02 .num{font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.2em;color:var(--gold);}
+  .p-vlv02 .ttl{font-family:"Fraunces",serif;font-weight:900;font-style:italic;font-size:22px;line-height:1;margin:10px 0;color:#fff;}
+  .p-vlv02 .sub{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold);}
+
+  .p-vlv03{background:#1F0A14;color:var(--rose);justify-content:flex-start;padding:18px;position:relative;}
+  .p-vlv03::after{content:"";position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(233,125,160,.4) 0%,transparent 70%);}
+  .p-vlv03 .num{font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;}
+  .p-vlv03 .ttl{font-family:"Shippori Mincho",serif;font-weight:800;font-size:24px;letter-spacing:.1em;line-height:1.1;margin-top:8px;color:#fff;}
+  .p-vlv03 .vert{position:absolute;bottom:14px;right:14px;font-family:"Fraunces",serif;font-style:italic;font-size:9px;letter-spacing:.2em;writing-mode:vertical-rl;color:var(--rose);}
+
+  .p-vlv04{background:linear-gradient(135deg,#1A3328 0%,#0A1A14 100%);color:#E8C547;justify-content:space-between;padding:14px;}
+  .p-vlv04 .num{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:.18em;}
+  .p-vlv04 .center{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .p-vlv04 .center .ttl{font-family:"Fraunces",serif;font-weight:900;font-size:36px;letter-spacing:-.02em;line-height:.9;color:#fff;}
+  .p-vlv04 .center .sub{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.18em;color:#E8C547;}
+  .p-vlv04 .meta{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.15em;text-align:right;}
+
+  .p-vlv05{background:#1F1714;color:#D88A5A;justify-content:flex-end;padding:16px;position:relative;}
+  .p-vlv05::before{content:"";position:absolute;top:30%;left:0;right:0;height:1px;background:#D88A5A;}
+  .p-vlv05::after{content:"";position:absolute;top:32%;left:0;right:0;height:1px;background:rgba(216,138,90,.4);}
+  .p-vlv05 .num{position:absolute;top:14px;left:16px;font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;}
+  .p-vlv05 .ttl{font-family:"Shippori Mincho",serif;font-weight:800;font-size:18px;line-height:1.15;color:#F4ECDD;}
+  .p-vlv05 .ttl small{display:block;font-family:"Fraunces",serif;font-style:italic;font-size:10px;color:#D88A5A;margin-top:6px;letter-spacing:.1em;font-weight:300;}
+
+  .p-vlv06{background:#F4DDD3;color:#5B1F2A;justify-content:flex-end;padding:14px;}
+  .p-vlv06 .center-block{position:absolute;top:25%;left:50%;transform:translateX(-50%);width:60%;aspect-ratio:1;border:2px solid #5B1F2A;}
+  .p-vlv06 .num{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.2em;text-align:center;}
+  .p-vlv06 .ttl{font-family:"Fraunces",serif;font-weight:900;font-style:italic;font-size:20px;line-height:1;text-align:center;margin-top:4px;}
+
+  .p-vlv07{background:#0A0A0A;color:#fff;justify-content:center;align-items:center;padding:14px;position:relative;}
+  .p-vlv07 .diamond{width:42px;height:42px;background:var(--red);transform:rotate(45deg);}
+  .p-vlv07 .ttl{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-family:"Anton",sans-serif;font-size:14px;letter-spacing:.1em;}
+  .p-vlv07 .num{position:absolute;top:14px;left:14px;font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.2em;color:var(--red);}
+
+  .p-vlv08{background:linear-gradient(180deg,#1A2440 0%,#0A0F1F 100%);color:#C8D4E8;justify-content:flex-end;padding:16px;position:relative;}
+  .p-vlv08 .moon{position:absolute;top:18%;right:18%;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFF8DC 0%,#A8B8D4 80%);box-shadow:0 0 30px rgba(255,248,220,.3);}
+  .p-vlv08 .ttl{font-family:"Shippori Mincho",serif;font-weight:700;font-size:14px;line-height:1.2;color:#fff;}
+  .p-vlv08 .num{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.2em;color:#C8D4E8;margin-bottom:4px;}
+
+  .p-vlv09{background:#5B1F2A;color:var(--gold);justify-content:space-between;padding:14px;}
+  .p-vlv09 .num{font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;}
+  .p-vlv09 .center-block{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:0 4px;}
+  .p-vlv09 .center-block .ttl{font-family:"Shippori Mincho",serif;font-weight:800;font-size:18px;line-height:1.15;color:#fff;}
+  .p-vlv09 .center-block .line{width:24px;height:1px;background:var(--gold);}
+  .p-vlv09 .center-block .sub{font-family:"Fraunces",serif;font-style:italic;font-size:9px;letter-spacing:.1em;}
+  .p-vlv09 .meta{font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.15em;text-align:right;}
+
+  .p-vlv10{background:#1A1A1F;color:#FF4081;justify-content:flex-end;padding:14px;position:relative;}
+  .p-vlv10::before{content:"";position:absolute;top:30%;bottom:30%;left:50%;width:1px;background:#FF4081;}
+  .p-vlv10 .num{position:absolute;top:14px;left:14px;font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;}
+  .p-vlv10 .ttl{font-family:"Anton",sans-serif;font-size:24px;letter-spacing:.04em;line-height:.95;text-align:center;color:#fff;}
+  .p-vlv10 .ttl small{display:block;font-size:9px;letter-spacing:.18em;margin-top:6px;color:#FF4081;}
+
+  .p-vlv11{background:#F4ECDD;color:#D2461F;justify-content:center;align-items:center;padding:14px;}
+  .p-vlv11 .ttl{font-family:"Fraunces",serif;font-weight:300;font-style:italic;font-size:46px;line-height:1;letter-spacing:-.02em;color:#D2461F;}
+  .p-vlv11 .num{position:absolute;top:14px;left:14px;font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.2em;color:#5B1F2A;}
+  .p-vlv11 .sub{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.3em;color:#5B1F2A;text-transform:uppercase;}
+
+  .p-vlv12{background:#0A0A0F;color:#C0C0D0;justify-content:flex-end;padding:14px;position:relative;}
+  .p-vlv12::before{content:"";position:absolute;top:35%;left:14px;right:14px;height:1px;background:linear-gradient(90deg,transparent 0%,#C0C0D0 50%,transparent 100%);}
+  .p-vlv12 .num{font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;color:#C0C0D0;margin-bottom:4px;}
+  .p-vlv12 .ttl{font-family:"Fraunces",serif;font-weight:900;font-style:italic;font-size:20px;line-height:1;color:#fff;}
+
+  /* ============ DETAIL VIEW ============ */
+  .detail-view{display:none;background:var(--paper);position:relative;z-index:1;}
+  .detail-view.is-active{display:block;}
+  .grid-view.is-hidden{display:none;}
+
+  .detail-back{
+    display:inline-flex;align-items:center;gap:8px;
+    margin:20px 24px 0;
+    font-family:"Anton",sans-serif;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink);cursor:pointer;
+    background:none;border:none;
+  }
+  .detail-back:hover{color:var(--red);}
+
+  .detail-hero{padding:24px 24px 0;}
+  .detail-issue-strip{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:2px solid var(--ink);border-bottom:1px solid var(--line);
+    padding:8px 0;margin-top:16px;
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .detail-issue-strip .cat{color:var(--red);}
+
+  .detail-grid{display:grid;grid-template-columns:1fr;gap:24px;padding:24px 24px 60px;}
+  @media(min-width:768px){.detail-grid{grid-template-columns:280px 1fr;gap:48px;padding:36px 48px 80px;}}
+  @media(min-width:1024px){.detail-grid{grid-template-columns:340px 1fr;gap:64px;}}
+
+  .detail-poster-wrap{align-self:start;}
+  @media(min-width:768px){
+    .detail-poster-wrap{position:sticky;top:120px;background:var(--paper);padding:12px 0;}
+  }
+  .detail-poster{
+    border:1.5px solid var(--ink);
+    box-shadow:8px 8px 0 var(--velvet);
+    max-width:280px;margin:0 auto;
+  }
+  @media(min-width:768px){.detail-poster{max-width:none;}}
+
+  .detail-poster-info{
+    margin-top:18px;text-align:center;
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.1em;
+    color:var(--ink-soft);text-transform:uppercase;
+    border-top:1px solid var(--line);padding-top:10px;
+  }
+
+  .detail-content h1.detail-title{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:clamp(28px, 6vw, 50px);line-height:1.1;
+    letter-spacing:-.01em;margin-bottom:8px;
+  }
+  .detail-orig{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
+    font-size:16px;color:var(--ink-soft);margin-bottom:24px;
+  }
+
+  .detail-meta-row{
+    display:flex;flex-wrap:wrap;gap:8px 12px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:12px 0;margin-bottom:32px;
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.08em;
+    color:var(--ink-soft);text-transform:uppercase;
+  }
+  .detail-meta-row span{display:inline-flex;align-items:center;gap:6px;}
+  .detail-meta-row span::after{content:"·";margin-left:12px;color:var(--line);}
+  .detail-meta-row span:last-child::after{display:none;}
+
+  .detail-score-block{
+    display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+    background:var(--ink);color:var(--paper);
+    padding:24px;margin-bottom:36px;
+    position:relative;overflow:hidden;
+  }
+  .detail-score-block::before{
+    content:"SCORE";position:absolute;top:8px;right:12px;
+    font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.2em;
+    color:var(--red);
+  }
+  .detail-score-num{
+    font-family:"Fraunces",serif;font-weight:900;
+    font-size:96px;line-height:.85;letter-spacing:-.04em;
+    color:var(--red);
+  }
+  .detail-score-num small{
+    font-family:"Anton",sans-serif;font-size:14px;letter-spacing:.1em;
+    color:var(--paper);opacity:.6;display:block;margin-top:4px;
+  }
+  .detail-score-verdict{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:600;
+    font-size:20px;line-height:1.3;color:var(--paper);
+  }
+  .detail-score-verdict small{
+    display:block;margin-top:8px;font-style:normal;font-weight:400;
+    font-size:13px;color:var(--red);font-family:"Anton",sans-serif;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+
+  .stream-section{
+    margin:0 0 32px;
+    border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);
+    padding:18px 0 20px;
+  }
+  .stream-section .stream-label{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.14em;
+    color:var(--ink);text-transform:uppercase;margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .stream-section .stream-label::after{content:"";flex:1;height:1px;background:var(--line);}
+  .stream-section .stream-label .play{color:var(--red);font-size:14px;}
+  .stream-buttons{display:flex;flex-wrap:wrap;gap:8px;}
+
+  .detail-lead{
+    font-family:"Fraunces",serif;font-weight:400;font-style:italic;
+    font-size:20px;line-height:1.5;letter-spacing:-.005em;
+    margin-bottom:32px;color:var(--ink);
+    border-left:3px solid var(--red);padding-left:18px;
+  }
+  .detail-lead::first-letter{
+    font-family:"Fraunces",serif;font-weight:900;font-style:normal;
+    font-size:58px;float:left;line-height:.85;
+    margin:8px 8px 0 -2px;color:var(--red);
+  }
+  .detail-body p{
+    font-family:"Shippori Mincho",serif;font-weight:500;
+    font-size:15px;line-height:1.85;margin-bottom:1.1em;color:var(--ink);
+  }
+
+  /* ============ MOBILE STICKY MINI BAR ============ */
+  .detail-mini-bar{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 14px;
+    background:var(--paper);
+    border-bottom:1.5px solid var(--ink);
+    position:sticky;top:0;z-index:40;
+  }
+  .mini-back{
+    flex-shrink:0;width:32px;height:32px;
+    border:1.5px solid var(--ink);background:var(--paper);
+    border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Anton",sans-serif;font-size:14px;color:var(--ink);
+    padding:0;
+  }
+  .mini-back:hover{background:var(--ink);color:var(--paper);}
+  .mini-poster{flex-shrink:0;width:54px;height:81px;position:relative;overflow:hidden;border:1px solid var(--ink);}
+  .mini-poster .poster{width:180px;height:270px;transform:scale(.30);transform-origin:0 0;border:none;position:absolute;top:0;left:0;}
+  .mini-poster .poster .score-badge{display:none;}
+  .mini-info{flex:1;min-width:0;overflow:hidden;}
+  .mini-info .mini-title{
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:14px;line-height:1.2;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .mini-info .mini-meta{
+    font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.08em;
+    color:var(--ink-soft);text-transform:uppercase;margin-top:2px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .mini-score{
+    flex-shrink:0;
+    background:var(--ink);color:var(--red);
+    padding:7px 11px 6px;
+    font-family:"Fraunces",serif;font-weight:900;
+    font-size:22px;letter-spacing:-.02em;line-height:1;
+  }
+  @media (max-width: 767px){
+    body.is-detail .masthead{display:none;}
+    body.is-detail .detail-back{display:none;}
+    body.is-detail .detail-hero{display:none;}
+    body.is-detail .detail-poster-wrap{display:none;}
+    body.is-detail .detail-title{font-size:22px;margin-bottom:4px;}
+    body.is-detail .detail-orig{font-size:13px;margin-bottom:14px;}
+    body.is-detail .detail-grid{padding:18px 18px 60px;}
+    body.is-detail .detail-score-block{padding:18px;margin-bottom:24px;gap:18px;}
+    body.is-detail .detail-score-num{font-size:72px;}
+    body.is-detail .detail-score-verdict{font-size:16px;}
+    body.is-detail .detail-lead{font-size:16px;margin-bottom:22px;padding-left:14px;}
+    body.is-detail .detail-lead::first-letter{font-size:42px;}
+    body.is-detail .detail-body p{font-size:14px;line-height:1.8;}
+  }
+  @media (min-width: 768px){.detail-mini-bar{display:none;}}
+
+  .detail-tags{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-top:32px;border-top:1px solid var(--line);padding-top:20px;
+  }
+  .tag{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:5px 12px 4px;border:1px solid var(--ink);
+    background:var(--paper);color:var(--ink);
+  }
+  .tag.accent{background:var(--gold);color:var(--paper);border-color:var(--gold);}
+
+  /* ============ STREAMING SERVICES ============ */
+  .svc-fanza{--svc:#FF2E8E;--svc-fg:#fff;}
+  .svc-dmm{--svc:#FF1F4F;--svc-fg:#fff;}
+  .svc-duga{--svc:#0066CC;--svc-fg:#fff;}
+  .svc-mgs{--svc:#000;--svc-fg:#FFD700;}
+  .svc-sod{--svc:#E60012;--svc-fg:#fff;}
+  .svc-unext{--svc:#000;--svc-fg:#FFD60A;}
+
+  .stream-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:0;padding:0 2px;align-items:center;}
+  .stream-chips .chip-label{
+    font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.1em;
+    color:var(--ink-soft);text-transform:uppercase;margin-right:2px;
+  }
+  .stream-chip{
+    width:22px;height:22px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:"Anton",sans-serif;font-size:11px;
+    background:var(--svc);color:var(--svc-fg);
+    border:1px solid var(--ink);
+    text-decoration:none;cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .stream-chip:hover{transform:translateY(-2px);box-shadow:2px 2px 0 var(--velvet);}
+
+  .stream-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:12px;
+    padding:18px 32px 16px;
+    min-width:280px;
+    background:var(--svc);color:var(--svc-fg);
+    border:2px solid var(--ink);
+    font-family:"Anton",sans-serif;font-size:18px;letter-spacing:.1em;
+    text-transform:uppercase;text-decoration:none;
+    box-shadow:4px 4px 0 var(--ink);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .stream-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--velvet);}
+  .stream-btn .arrow{font-size:14px;opacity:.8;margin-left:4px;}
+  @media (min-width: 768px){
+    .stream-btn{min-width:340px;padding:20px 40px 18px;font-size:20px;}
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    border-top:2px solid var(--ink);
+    padding:28px 24px;text-align:center;
+    background:#0A070A;color:var(--ink);
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  footer .red{color:var(--red);}
+  footer .small{
+    display:block;margin-top:10px;font-family:"Fraunces",serif;
+    font-style:italic;font-size:13px;letter-spacing:0;
+    text-transform:none;font-weight:300;color:var(--ink-soft);
+    max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6;
+  }
+  footer .r18-disclaimer{
+    margin-top:18px;padding-top:14px;
+    border-top:1px solid rgba(244,236,221,.1);
+    font-family:"DM Sans",sans-serif;font-size:10px;letter-spacing:.12em;
+    color:var(--red);
+  }
+
+  .empty-state{
+    text-align:center;padding:80px 24px;
+    font-family:"Fraunces",serif;font-style:italic;font-size:18px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== AGE GATE =================== -->
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-inner">
+    <div class="age-gate-r18">R18 ADULT CONTENT</div>
+    <div class="age-gate-title">Velvet<em>&amp;</em>Press</div>
+    <div class="age-gate-sub">— after-hours review magazine</div>
+    <div class="age-gate-text">
+      当サイトはアダルト作品のレビューを掲載する<strong>成人向けサイト</strong>です。<br>
+      18歳未満の方の閲覧は固くお断りいたします。
+    </div>
+    <div class="age-gate-q">あなたは18歳以上ですか？</div>
+    <div class="age-gate-buttons">
+      <button class="age-btn yes" id="ageYes">はい(18歳以上)</button>
+      <button class="age-btn no" id="ageNo">いいえ</button>
+    </div>
+    <div class="age-gate-foot">YESを選択した時点で、当サイト規約に同意したものとみなします。</div>
+  </div>
+</div>
+
+<!-- =================== MASTHEAD =================== -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="meta-l">
+      <span><span class="dot"></span>Adult · Reviews · Personal Log</span>
+      <span class="r18-badge">R18</span>
+    </div>
+    <div class="meta-r">
+      <button class="issue-selector" id="issueSelector" aria-haspopup="true">
+        <span id="currentIssueLabel">ALL ISSUES</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="issue-dropdown" id="issueDropdown" hidden></div>
+    </div>
+  </div>
+  <h1 class="masthead-title">Velvet<span class="amp">&amp;</span>Press</h1>
+  <div class="masthead-bottom">
+    <div class="tagline">— in praise of the women who light up the night.</div>
+    <div class="issue">100 / 100 SCORING SYSTEM</div>
+  </div>
+</header>
+
+<!-- =================== GRID VIEW =================== -->
+<section class="grid-view" id="gridView">
+  <div class="filter-bar">
+    <div class="filter-row">
+      <span class="label">Score ▸</span>
+      <button class="filter-btn is-active" data-band="all">すべて <span class="count" id="cnt-all">0</span></button>
+      <button class="filter-btn" data-band="90">90点以上 <span class="count" id="cnt-90">0</span></button>
+      <button class="filter-btn" data-band="80">80–89点 <span class="count" id="cnt-80">0</span></button>
+      <button class="filter-btn" data-band="70">70–79点 <span class="count" id="cnt-70">0</span></button>
+    </div>
+    <div class="filter-row" id="genreRow">
+      <span class="label">Genre ▸</span>
+    </div>
+  </div>
+
+  <div class="grid-section">
+    <div class="grid-section-head">
+      <h2>Latest <em>Reviews</em></h2>
+      <div class="count-text" id="resultCount">— Works</div>
+    </div>
+    <div class="poster-grid" id="posterGrid"></div>
+    <div class="empty-state" id="emptyState" hidden>該当する作品がありません。</div>
+  </div>
+</section>
+
+<!-- =================== DETAIL VIEW =================== -->
+<section class="detail-view" id="detailView">
+  <div class="detail-mini-bar">
+    <button class="mini-back" id="miniBackBtn" aria-label="一覧へ戻る">←</button>
+    <div class="mini-poster" id="miniPoster"></div>
+    <div class="mini-info">
+      <div class="mini-title" id="miniTitle"></div>
+      <div class="mini-meta" id="miniMeta"></div>
+    </div>
+    <div class="mini-score" id="miniScore"></div>
+  </div>
+  <button class="detail-back" id="backBtn">← 一覧へ戻る</button>
+  <div class="detail-hero">
+    <div class="detail-issue-strip">
+      <span class="cat" id="dCategory">REVIEW</span>
+      <span id="dIssueDate">— · VOL.01</span>
+    </div>
+  </div>
+  <div class="detail-grid">
+    <div class="detail-poster-wrap">
+      <div id="dPoster"></div>
+      <div class="detail-poster-info" id="dPosterInfo"></div>
+    </div>
+    <div class="detail-content">
+      <h1 class="detail-title" id="dTitle"></h1>
+      <div class="detail-orig" id="dOrig"></div>
+      <div class="detail-meta-row" id="dMetaRow"></div>
+
+      <div class="detail-score-block">
+        <div class="detail-score-num" id="dScoreNum">—<small>OUT OF 100</small></div>
+        <div class="detail-score-verdict" id="dVerdict"></div>
+      </div>
+
+      <div class="stream-section" id="dStreamSection">
+        <div class="stream-label"><span class="play">▶</span>WATCH NOW — 配信中サービス</div>
+        <div class="stream-buttons" id="dStreams"></div>
+      </div>
+
+      <p class="detail-lead" id="dLead"></p>
+      <div class="detail-body" id="dBody"></div>
+
+      <div class="detail-tags" id="dTags"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © VELVET <span class="red">&amp;</span> PRESS · Est. 2026
+  <span class="small">本サイトに掲載しているレビューは個人的な感想です。配信状況は時期により変動するため、リンク先で最新情報をご確認ください。</span>
+  <span class="small" style="margin-top:14px;">
+    <a href="about.html" style="color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;">About</a>
+    &nbsp;·&nbsp;
+    <a href="privacy.html" style="color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;">プライバシーポリシー</a>
+  </span>
+  <div class="r18-disclaimer">⚠ 本サイトは18歳未満閲覧禁止のアダルトコンテンツを含みます</div>
+</footer>
+
+<script>
+/*__REVIEWS_DATA__*/
+
+function streamUrl(svcKey, film){
+  // 直リンクが定義されていればそれを優先
+  if(directLinks[film.id]) return directLinks[film.id];
+  // フォールバック：検索URL
+  const svc = services[svcKey]; if(!svc) return "#";
+  return svc.base + encodeURIComponent(film.code);
+}
+function renderChips(film){
+  const list = filmStreams[film.id] || []; if(list.length === 0) return "";
+  const chips = list.map(k => {
+    const svc = services[k]; if(!svc) return "";
+    return `<a class="stream-chip svc-${k}" href="${streamUrl(k, film)}" target="_blank" rel="noopener" title="${svc.name}で観る" onclick="event.stopPropagation()">${svc.short}</a>`;
+  }).join("");
+  return `<div class="stream-chips"><span class="chip-label">▶</span>${chips}</div>`;
+}
+function renderStreamButtons(film){
+  const list = filmStreams[film.id] || [];
+  if(list.length === 0) return `<div style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:14px;">現在、主要な配信サービスでは取り扱いがありません。</div>`;
+  return list.map(k => {
+    const svc = services[k]; if(!svc) return "";
+    return `<a class="stream-btn svc-${k}" href="${streamUrl(k, film)}" target="_blank" rel="noopener">${svc.name}<span class="arrow">↗</span></a>`;
+  }).join("");
+}
+
+// ============ ISSUES & GENRES ============
+const issues = [
+  { id:"all",     label:"ALL ISSUES" },
+  { id:"2026-05", label:"VOL.05 — 2026年5月" },
+  { id:"2026-04", label:"VOL.04 — 2026年4月" },
+  { id:"2026-03", label:"VOL.03 — 2026年3月" },
+  { id:"2026-02", label:"VOL.02 — 2026年2月" },
+  { id:"2026-01", label:"VOL.01 — 2026年1月" }
+];
+/*__FILM_ISSUES__*/
+const genres = [
+  { key:"all",            label:"すべて" },
+  { key:"単体",            label:"単体" },
+  { key:"企画",            label:"企画もの" },
+  { key:"ドラマ",          label:"ドラマ" },
+  { key:"ロマンス",        label:"ロマンス" },
+  { key:"シチュエーション", label:"シチュエーション" }
+];
+
+// ============ STATE ============
+let currentBand = "all", currentGenre = "all", currentIssue = "all";
+const grid = document.getElementById("posterGrid");
+const gridView = document.getElementById("gridView");
+const detailView = document.getElementById("detailView");
+const emptyState = document.getElementById("emptyState");
+
+// ============ AGE GATE ============
+const ageGate = document.getElementById("ageGate");
+const STORAGE_KEY = "vlv_age_verified";
+function checkAgeGate(){
+  try{ if(localStorage.getItem(STORAGE_KEY) === "1") ageGate.classList.add("is-hidden"); }catch(e){}
+}
+document.getElementById("ageYes").addEventListener("click", () => {
+  try{ localStorage.setItem(STORAGE_KEY, "1"); }catch(e){}
+  ageGate.classList.add("is-hidden");
+});
+document.getElementById("ageNo").addEventListener("click", () => {
+  window.location.href = "https://www.google.com";
+});
+checkAgeGate();
+
+// ============ RENDER ============
+function scoreClass(s){ if(s >= 95) return "red"; if(s >= 85) return "gold"; return ""; }
+function inBand(score, band){
+  if(band === "all") return true;
+  if(band === "90") return score >= 90;
+  if(band === "80") return score >= 80 && score < 90;
+  if(band === "70") return score >= 70 && score < 80;
+  return false;
+}
+function isMatch(film, opts = {}){
+  const band = opts.band ?? currentBand;
+  const genre = opts.genre ?? currentGenre;
+  const issue = opts.issue ?? currentIssue;
+  if(!inBand(film.score, band)) return false;
+  if(genre !== "all" && !film.genre.includes(genre)) return false;
+  if(issue !== "all" && filmIssues[film.id] !== issue) return false;
+  return true;
+}
+function renderGrid(){
+  const filtered = films.filter(f => isMatch(f));
+  grid.innerHTML = "";
+  emptyState.hidden = filtered.length !== 0;
+  filtered.forEach((f, i) => {
+    const cls = f.posterClass || f.id;
+    const card = document.createElement("div");
+    card.className = "poster-card";
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.innerHTML = `
+      <div class="poster p-${cls}">
+        <div class="score-badge ${scoreClass(f.score)}">${f.score}</div>
+        ${posterMarkup[f.id] || ""}
+      </div>
+      ${renderChips(f)}
+    `;
+    card.addEventListener("click", () => goToDetail(f.id));
+    grid.appendChild(card);
+  });
+  document.getElementById("resultCount").textContent = `${filtered.length} WORKS`;
+  updateCounts();
+}
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    currentBand = btn.dataset.band;
+    renderGrid();
+  });
+});
+function renderGenreButtons(){
+  const row = document.getElementById("genreRow");
+  row.querySelectorAll(".genre-btn").forEach(b => b.remove());
+  genres.forEach(g => {
+    const btn = document.createElement("button");
+    btn.className = "genre-btn" + (g.key === currentGenre ? " is-active" : "");
+    btn.dataset.genre = g.key;
+    btn.textContent = g.label;
+    btn.addEventListener("click", () => {
+      currentGenre = g.key;
+      row.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      renderGrid();
+    });
+    row.appendChild(btn);
+  });
+}
+
+const issueSelector = document.getElementById("issueSelector");
+const issueDropdown = document.getElementById("issueDropdown");
+const currentIssueLabel = document.getElementById("currentIssueLabel");
+function renderIssueDropdown(){
+  issueDropdown.innerHTML = "";
+  issues.forEach((iss) => {
+    const btn = document.createElement("button");
+    btn.dataset.issue = iss.id; btn.textContent = iss.label;
+    if(iss.id === currentIssue) btn.classList.add("is-active");
+    if(iss.id === "all") btn.classList.add("issue-divider");
+    btn.addEventListener("click", () => {
+      currentIssue = iss.id;
+      currentIssueLabel.textContent = iss.label;
+      issueDropdown.hidden = true;
+      issueSelector.classList.remove("is-open");
+      renderIssueDropdown();
+      renderGrid();
+    });
+    issueDropdown.appendChild(btn);
+  });
+}
+issueSelector.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const isHidden = issueDropdown.hidden;
+  issueDropdown.hidden = !isHidden;
+  issueSelector.classList.toggle("is-open", isHidden);
+});
+document.addEventListener("click", (e) => {
+  if(!e.target.closest(".meta-r")){ issueDropdown.hidden = true; issueSelector.classList.remove("is-open"); }
+});
+
+function updateCounts(){
+  ["all","90","80","70"].forEach(band => {
+    const el = document.getElementById(`cnt-${band}`); if(!el) return;
+    const n = films.filter(f => isMatch(f, { band })).length;
+    el.textContent = n;
+  });
+}
+
+// ============ DETAIL VIEW ============
+function goToDetail(id){
+  const f = films.find(x => x.id === id); if(!f) return;
+  const cls = f.posterClass || f.id;
+  document.getElementById("dCategory").textContent = f.genre.join(" · ");
+  document.getElementById("dIssueDate").textContent = `${f.code} · ${f.year}年`;
+  document.getElementById("dTitle").textContent = f.title;
+  document.getElementById("dOrig").textContent = `${f.orig} — ${f.code}`;
+  document.getElementById("dMetaRow").innerHTML = `
+    <span>監督 — ${f.director}</span>
+    <span>メーカー — ${f.studio}</span>
+    <span>${f.year}年</span>
+    <span>${f.runtime}分</span>
+  `;
+  document.getElementById("dScoreNum").innerHTML = `${f.score}<small>OUT OF 100</small>`;
+  document.getElementById("dVerdict").innerHTML = `「${f.verdict}」<small>EDITOR'S TAKE</small>`;
+  document.getElementById("dStreams").innerHTML = renderStreamButtons(f);
+  document.getElementById("dLead").textContent = f.lead;
+  document.getElementById("dBody").innerHTML = f.body.slice(0, 2).map(p => `<p>${p}</p>`).join("");
+  document.getElementById("dTags").innerHTML = f.tags.map((t,i) => `<span class="tag${i===0?' accent':''}">#${t}</span>`).join("");
+
+  document.getElementById("dPoster").innerHTML = `<div class="detail-poster poster p-${cls}">${posterMarkup[f.id] || ""}</div>`;
+  document.getElementById("dPosterInfo").innerHTML = `${f.studio}<br>${f.year} · ${f.runtime} min`;
+
+  document.getElementById("miniPoster").innerHTML = `<div class="poster p-${cls}">${posterMarkup[f.id] || ""}</div>`;
+  document.getElementById("miniTitle").textContent = f.title;
+  document.getElementById("miniMeta").textContent = `${f.studio} · ${f.year}`;
+  document.getElementById("miniScore").textContent = f.score;
+
+  document.body.classList.add("is-detail");
+  gridView.classList.add("is-hidden");
+  detailView.classList.add("is-active");
+  window.scrollTo({top:0, behavior:"instant"});
+  history.pushState({view:"detail", id}, "", `#/work/${id}`);
+}
+function goToGrid(){
+  document.body.classList.remove("is-detail");
+  detailView.classList.remove("is-active");
+  gridView.classList.remove("is-hidden");
+  window.scrollTo({top:0, behavior:"instant"});
+  history.pushState({view:"grid"}, "", "#/");
+}
+document.getElementById("backBtn").addEventListener("click", goToGrid);
+document.getElementById("miniBackBtn").addEventListener("click", goToGrid);
+window.addEventListener("popstate", () => {
+  const hash = location.hash;
+  if(hash.startsWith("#/work/")){
+    const id = hash.replace("#/work/", "");
+    goToDetail(id);
+  } else {
+    document.body.classList.remove("is-detail");
+    detailView.classList.remove("is-active");
+    gridView.classList.remove("is-hidden");
+  }
+});
+
+// ============ INIT ============
+renderGenreButtons();
+renderIssueDropdown();
+renderGrid();
+if(location.hash.startsWith("#/work/")){
+  const id = location.hash.replace("#/work/", "");
+  if(films.find(f => f.id === id)) goToDetail(id);
+}
+</script>
+</body>
+</html>
