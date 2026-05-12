@@ -731,100 +731,28 @@
 </footer>
 
 <script>
-// ============ FILM DATA (PLACEHOLDER) ============
-// All titles, codes, directors, studios are SAMPLE PLACEHOLDERS.
-// Replace with real data when going live.
+// ============ FILM DATA (auto-generated from reviews.json) ============
 const films = [
-  {id:"vlv01", code:"HMN-211", title:"ペロペロGAL 堀北わん",   orig:"HMN-211",  director:"本中", studio:"本中", year:2024, runtime:120, score:96, verdict:"間違いなく堀北わんの【最高傑作】", genre:["単体","シチュエーション"],
+  {id:"vlv01", code:"HMN-211", title:"ペロペロGAL 堀北わん", orig:"HMN-211", director:"本中", studio:"本中", year:2024, runtime:120, score:97, verdict:"間違いなく堀北わんの【最高傑作】", genre:["単体","シチュエーション"],
     lead:"堀北わんさんの繊細な表情の変化——本作はそれが最も豊かに表れた一本。観終わった後にもう一度観たくなる。",
     body:["今回はなんと言っても「キス」の描写がとにかく秀逸。","小悪魔ギャルなわんちゃんがM男を徹底的にリードする「甘サド感」がたまらない。息ができないくらい濃厚に責め立てられるシチュエーションはたまらないの一言。特に、主導権を完全に握られて翻弄されていく過程のリアリティがエグい!「ただひたすら可愛いギャルに支配されたい…」って願望がある人には間違いなくぶっ刺さる一本。この熱量、さすがわんちゃんって感じ。超絶おすすめ!!"],
     tags:["堀北わん","本中","2024","HMN-211"]},
-  {id:"vlv02", code:"DLDSS-485", title:"魅惑のバニホフェラ 月乃ルナ",   orig:"DLDSS-485",  director:"DAHLIA", studio:"DAHLIA", year:2024, runtime:120, score:94, verdict:"月乃ルナが見せる新境地、視覚的破壊力", genre:["シチュエーション","単体"],
+  {id:"vlv02", code:"DLDSS-485", title:"魅惑のバニホフェラ 月乃ルナ", orig:"DLDSS-485", director:"DAHLIA", studio:"DAHLIA", year:2024, runtime:120, score:94, verdict:"月乃ルナが見せる新境地、視覚的破壊力", genre:["シチュエーション","単体"],
     lead:"月乃ルナちゃんがバニーガールになってくれるだけでも最高なんだけど、今回の目玉「バニホフェラ」がとにかく新感覚でヤバい!",
     body:["お尻をピョンピョン跳ねさせながらのご奉仕は、正面からの熱量と後ろからの絶景を同時に楽しめる、まさに尻フェチ垂涎の神企画。ルナちゃんのあのエロい表情と、リズムに乗ったテクニックが絶妙に絡み合って、視覚的にも感覚的にも圧倒されること間違いなしだね。","ただの作品に飽きた人には、この新体験のフェティッシュな刺激がグサリと刺さるはず。一度見たら「バニホ」の虜になる、マジで中毒性の高い一本。超絶おすすめ!"],
     tags:["月乃ルナ","DAHLIA","2024","DLDSS-485","バニーガール"]},
-  {id:"vlv03", code:"GVH-612", title:"接吻依存エスカレート不倫 美咲かんな", orig:"GVH-612",            director:"GLORY QUEST", studio:"GLORY QUEST", year:2024, runtime:130, score:95, verdict:"背徳感たっぷりの接吻依存が最高にエロい",   genre:["ドラマ","シチュエーション"],
+  {id:"vlv03", code:"GVH-612", title:"接吻依存エスカレート不倫 美咲かんな", orig:"GVH-612", director:"GLORY QUEST", studio:"GLORY QUEST", year:2024, runtime:130, score:95, verdict:"背徳感たっぷりの接吻依存が最高にエロい", genre:["ドラマ","シチュエーション"],
     lead:"憧れの上司・美咲かんなさんとの「許されない関係」を描いた本作、とにかくキスへの執着心が凄まじい!",
     body:["不倫の罪悪感を打ち消すかのように、何度も、それこそ行為の何倍も重ねられる濃厚なベロキスがとにかく秀逸。オフィスカジュアルを身にまとった凛とした姿と、二人きりになったときに見せる脆さ、そして貪るようなキスのギャップに完全にやられた…!","ストーリー性も高くて、かんなさんの囁き声を聞いているだけで没入感が半端ないんだよね。ただ抜けるだけじゃなく、胸が締め付けられるような切なさと背徳感を同時に味わいたい人にはこれ以上ない一本。マジで名作です!"],
-    tags:["美咲かんな","GLORY QUEST","2024","GVH-612","不倫"]},
-  {id:"vlv04", code:"VLV-004", title:"雨の前の手紙", orig:"Letter Before Rain",      director:"監督D", studio:"スタジオD", year:2026, runtime:105, score:88, verdict:"安定感のある王道",     genre:["単体","ロマンス"],
-    lead:"派手さはないが、丁寧に作られた手堅い一本。安心して観られる王道作品。",
-    body:["伝統的な作りで、ジャンルファンが求めるツボを的確に押さえている。","演出のリズムが心地よく、最後まで飽きさせない構成力は流石のひとこと。"],
-    tags:["スタジオD","2026","王道"]},
-  {id:"vlv05", code:"VLV-005", title:"砂時計の女",   orig:"Hourglass Woman",         director:"監督E", studio:"スタジオE", year:2026, runtime:115, score:85, verdict:"実験的な意欲作",       genre:["企画","ドラマ"],
-    lead:"挑戦的な構成で賛否が分かれるかもしれないが、創作意欲を強く感じる一本。",
-    body:["時系列を入れ替えた構成が、本作の独特なリズムを生み出している。実験的な試みとして評価したい。","万人向けではないが、ジャンル作品の可能性を広げる意欲作として一見の価値がある。"],
-    tags:["スタジオE","2026","実験作","企画"]},
-  {id:"vlv06", code:"VLV-006", title:"零度の祝祭",   orig:"Zero Degree Festival",    director:"監督F", studio:"スタジオF", year:2026, runtime:125, score:91, verdict:"美術と衣装が圧巻",     genre:["シチュエーション","ドラマ"],
-    lead:"画面の隅々まで行き届いた美術設計と、印象的な衣装が記憶に残る。",
-    body:["美術と衣装のクオリティが他を圧倒している。一枚の絵として成立するカットが多い。","編集も丁寧で、ロングショットの使い方が効果的。撮影監督の手腕が光る。"],
-    tags:["スタジオF","2026","美術"]},
-  {id:"vlv07", code:"VLV-007", title:"硝子の部屋",   orig:"Glass Room",              director:"監督G", studio:"スタジオG", year:2025, runtime:100, score:79, verdict:"惜しい点もあるが見所多い",genre:["単体"],
-    lead:"全体的にやや散漫な印象もあるが、随所に見るべきシーンがある一本。",
-    body:["前半の入りがやや遅く、本格的に物語が動き出すまで時間がかかる。","中盤以降の展開には見るべき箇所も多く、編集の判断次第で大きく評価が変わったかもしれない。"],
-    tags:["スタジオG","2025"]},
-  {id:"vlv08", code:"VLV-008", title:"月光のソナタ", orig:"Moonlight Sonata",        director:"監督H", studio:"スタジオH", year:2025, runtime:118, score:93, verdict:"音響設計が群を抜いて秀逸",genre:["ドラマ","ロマンス"],
-    lead:"音響と劇伴の質感が、本作を一段上の作品に押し上げている。",
-    body:["劇伴と環境音の使い分けが極めて巧妙。映像のテンポと完璧に同期している。","音響に予算と手間をかけた作品の説得力がここにある。映像作品としての完成度が高い。"],
-    tags:["スタジオH","2025","音響","ドラマ"]},
-  {id:"vlv09", code:"VLV-009", title:"赤い書斎",     orig:"Crimson Study",           director:"監督I", studio:"スタジオI", year:2025, runtime:108, score:82, verdict:"クラシカルな良作",     genre:["シチュエーション","単体"],
-    lead:"古典的な作風だが、その分安定感があり、ジャンル作品の手本のような完成度。",
-    body:["ベテランの仕事を感じさせる安定感のある演出。基本に忠実で、観客を裏切らない作りになっている。","新規性には欠けるかもしれないが、ジャンルの基本形として参照価値が高い一本。"],
-    tags:["スタジオI","2025","クラシカル"]},
-  {id:"vlv10", code:"VLV-010", title:"電飾の夜",     orig:"Neon Night",              director:"監督J", studio:"スタジオJ", year:2025, runtime:95,  score:76, verdict:"スタイル先行の実験作", genre:["企画"],
-    lead:"映像のスタイリッシュさは際立つが、内容面でやや物足りなさが残る。",
-    body:["ビジュアル面の挑戦は素晴らしい。色彩設計も独特で、画面映えする仕上がり。","ただ、内容のドラマ性がやや薄く、見終わった後の満足感には個人差がありそうだ。"],
-    tags:["スタジオJ","2025","スタイル","企画"]},
-  {id:"vlv11", code:"VLV-011", title:"白い余韻",     orig:"White Resonance",         director:"監督K", studio:"スタジオK", year:2025, runtime:128, score:90, verdict:"丁寧な作りの良作",     genre:["ドラマ"],
-    lead:"派手さはないが、隅々まで丁寧に作り込まれた良作。再生回数を重ねたくなる質感。",
-    body:["ロングテイクの使い方が効果的で、出演者の演技を活かす演出になっている。","脚本の構造もしっかりしており、観客を物語の中心に引き込む構成力がある。"],
-    tags:["スタジオK","2025","ドラマ","ロングテイク"]},
-  {id:"vlv12", code:"VLV-012", title:"銀の沈黙",     orig:"Silver Silence",          director:"監督L", studio:"スタジオL", year:2025, runtime:112, score:87, verdict:"静かな佳作",           genre:["ドラマ","ロマンス"],
-    lead:"声高に主張しないが、観終わった後に静かな余韻を残す佳作。",
-    body:["カメラワークが控えめで、出演者の存在感を最大限に引き出している。","全体のトーンが統一されており、雰囲気作品としての完成度が高い。"],
-    tags:["スタジオL","2025","雰囲気"]},
-  {id:"vlv13", code:"VLV-013", title:"灼熱の理論",   orig:"Burning Theory",          director:"監督M", studio:"スタジオM", year:2025, runtime:103, score:73, verdict:"テンポは良いが薄味",   genre:["企画"],
-    lead:"テンポ重視の構成で観やすいが、印象に残る要素はやや少ない。",
-    body:["編集のテンポは良く、流して観るには適している。","ただ、演出の独自性に乏しく、量産型の枠を超えるには至っていない。"],
-    tags:["スタジオM","2025"]},
-  {id:"vlv14", code:"VLV-014", title:"無音の朝",     orig:"Silent Morning",          director:"監督N", studio:"スタジオN", year:2024, runtime:122, score:89, verdict:"季節感の演出が秀逸",   genre:["ドラマ"],
-    lead:"季節の質感を画面に閉じ込めた、繊細な作り。冬の朝の冷たい空気が伝わってくる。",
-    body:["撮影の質感が素晴らしく、季節の空気感を画面から感じ取れる稀有な作品。","脚本も丁寧で、登場人物の感情の機微を丁寧に追っている。"],
-    tags:["スタジオN","2024","季節感"]},
-  {id:"vlv15", code:"VLV-015", title:"鏡のレッスン", orig:"Mirror Lesson",           director:"監督O", studio:"スタジオO", year:2024, runtime:99,  score:81, verdict:"手堅い佳作",           genre:["シチュエーション"],
-    lead:"派手さはないが、ジャンル作品としての基本を押さえた手堅い佳作。",
-    body:["ベテラン監督の安定感が光る作品。観客の期待に確実に応える作りになっている。","新規性は控えめだが、ジャンルファンが安心して楽しめる一本。"],
-    tags:["スタジオO","2024","ベテラン"]},
-  {id:"vlv16", code:"VLV-016", title:"夜行の話法",   orig:"Nocturnal Grammar",       director:"監督P", studio:"スタジオP", year:2024, runtime:135, score:71, verdict:"惜しい大作",           genre:["ドラマ","企画"],
-    lead:"野心的な企画だが、長尺ゆえに集中力を維持しづらい場面もある。",
-    body:["企画意図は明確で、作り手の野心を感じさせる。美術の作り込みも丁寧。","ただ135分という長さがやや負担で、編集の整理ができていれば一段上の評価になっていただろう。"],
-    tags:["スタジオP","2024","長尺","野心作"]}
+    tags:["美咲かんな","GLORY QUEST","2024","GVH-612","不倫"]}
 ];
 
 // ============ POSTER MARKUP ============
 const posterMarkup = {
-  vlv01: `<div class="num">HMN—211</div><div class="ttl">ペロペロGAL<br>堀北わん</div><div class="sub">HORIKITA WAN · 本中</div>`,
-  vlv02: `<div class="frame"><div class="num">DLDSS·485</div><div class="ttl">月乃ルナ</div><div class="sub">BUNNY · DAHLIA</div></div>`,
-  vlv03: `<div class="num">GVH—612</div><div class="ttl">美咲<br>かんな</div><div class="vert">MISAKI KANNA</div>`,
-  vlv04: `<div class="num">VLV·004</div><div class="center"><div class="ttl">04</div><div class="sub">LETTER BEFORE RAIN</div></div><div class="meta">2026 / 105MIN</div>`,
-  vlv05: `<div class="num">VLV—005</div><div class="ttl">砂時計の女<small>HOURGLASS WOMAN</small></div>`,
-  vlv06: `<div class="center-block"></div><div class="num">VLV—006</div><div class="ttl">Zero Degree<br>Festival</div>`,
-  vlv07: `<div class="num">VLV·007</div><div class="diamond"></div><div class="ttl">硝子の部屋</div>`,
-  vlv08: `<div class="moon"></div><div class="num">VLV—008</div><div class="ttl">月光のソナタ<br>Moonlight Sonata</div>`,
-  vlv09: `<div class="num">VLV·009</div><div class="center-block"><div class="ttl">赤い書斎</div><div class="line"></div><div class="sub">Crimson Study</div></div><div class="meta">2025</div>`,
-  vlv10: `<div class="num">VLV—010</div><div class="ttl">NEON<br>NIGHT<small>VLV-010 · 電飾の夜</small></div>`,
-  vlv11: `<div class="num">VLV·011</div><div class="ttl">白い<br>余韻</div><div class="sub">WHITE RESONANCE</div>`,
-  vlv12: `<div class="num">VLV—012</div><div class="ttl">Silver<br>Silence</div>`
+  vlv01: `<div class="num">HMN—211</div><div class="ttl">堀北わん</div><div class="sub">本中</div>`,
+  vlv02: `<div class="frame"><div class="num">DLDSS·485</div><div class="ttl">月乃ルナ</div><div class="sub">DAHLIA</div></div>`,
+  vlv03: `<div class="num">GVH—612</div><div class="ttl">美<br>咲<br>か<br>ん<br>な</div><div class="vert">GVH-612</div>`
 };
-// Reuse poster styles for last 4 works
-posterMarkup.vlv13 = posterMarkup.vlv05;
-posterMarkup.vlv14 = posterMarkup.vlv11;
-posterMarkup.vlv15 = posterMarkup.vlv02;
-posterMarkup.vlv16 = posterMarkup.vlv01;
-films[12].posterClass = "vlv05";
-films[13].posterClass = "vlv11";
-films[14].posterClass = "vlv02";
-films[15].posterClass = "vlv01";
 
 // ============ STREAMING SERVICES ============
 const services = {
@@ -836,20 +764,17 @@ const services = {
   unext:  {name:"U-NEXT",    short:"U", base:"https://video.unext.jp/freeword?query="}
 };
 const filmStreams = {
-  vlv01:["fanza"], vlv02:["fanza"],       vlv03:["fanza"],
-  vlv04:["fanza","dmm"],         vlv05:["fanza","mgs","sod"], vlv06:["fanza","duga","dmm"],
-  vlv07:["fanza"],               vlv08:["fanza","dmm","unext"],vlv09:["fanza","mgs"],
-  vlv10:["fanza","duga"],        vlv11:["fanza","dmm","mgs"], vlv12:["fanza","unext"],
-  vlv13:["fanza","duga"],        vlv14:["fanza","dmm","mgs"], vlv15:["fanza","sod"],
-  vlv16:["fanza","dmm","duga"]
+  vlv01:["fanza"],
+  vlv02:["fanza"],
+  vlv03:["fanza"]
 };
-// ============ DIRECT LINKS (個別作品の直リンク) ============
-// アフィリエイトID取得後、al.dmm.co.jp 経由のリンクに置き換える
+// ============ DIRECT LINKS ============
 const directLinks = {
   vlv01: "https://video.dmm.co.jp/av/content/?id=hmn00211",
   vlv02: "https://video.dmm.co.jp/av/content/?id=dldss00485",
   vlv03: "https://video.dmm.co.jp/av/content/?id=gvh00612"
 };
+
 
 function streamUrl(svcKey, film){
   // 直リンクが定義されていればそれを優先
@@ -885,11 +810,9 @@ const issues = [
   { id:"2026-01", label:"VOL.01 — 2026年1月" }
 ];
 const filmIssues = {
-  vlv01:"2026-05", vlv02:"2026-05", vlv03:"2026-05", vlv04:"2026-05",
-  vlv05:"2026-04", vlv06:"2026-04", vlv07:"2026-04",
-  vlv08:"2026-03", vlv09:"2026-03", vlv10:"2026-03",
-  vlv11:"2026-02", vlv12:"2026-02", vlv13:"2026-02",
-  vlv14:"2026-01", vlv15:"2026-01", vlv16:"2026-01"
+  vlv01:"2026-05",
+  vlv02:"2026-05",
+  vlv03:"2026-05"
 };
 const genres = [
   { key:"all",            label:"すべて" },
