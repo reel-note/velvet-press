@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUICK REVIEWS — VELVET&PRESS [R18]</title>
+<meta name="description" content="VELVET&PRESS の編集後記。短く、率直に。観た作品の一言メモ集。">
+<meta name="rating" content="adult">
+<meta name="robots" content="noindex,nofollow">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VELVET&PRESS">
+<meta property="og:title" content="QUICK REVIEWS — VELVET&PRESS 編集後記">
+<meta property="og:description" content="短く、率直に。観た作品の一言メモ集。">
+<meta property="og:locale" content="ja_JP">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#1A1419;
+    --paper-2:#231B22;
+    --ink:#F4ECDD;
+    --ink-soft:#A89889;
+    --red:#D8344A;
+    --red-deep:#8E1F30;
+    --gold:#C9A664;
+    --velvet:#5B1F3B;
+    --rose:#E97DA0;
+    --line:rgba(244,236,221,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--paper);color:var(--ink);font-family:"DM Sans","Shippori Mincho",sans-serif;-webkit-font-smoothing:antialiased;}
+  body{
+    min-height:100vh;
+    background-image:
+      radial-gradient(rgba(244,236,221,.025) 1px, transparent 1px),
+      radial-gradient(rgba(244,236,221,.015) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 1px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ============ AGE GATE ============ */
+  .age-gate{
+    position:fixed;inset:0;z-index:9999;
+    background:#0A070A;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .age-gate.is-hidden{display:none;}
+  .age-gate-inner{
+    max-width:480px;width:100%;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    padding:36px 28px;
+    text-align:center;
+    box-shadow:0 0 60px rgba(216,52,74,.15);
+  }
+  .age-gate-r18{
+    display:inline-block;
+    font-family:"Anton",sans-serif;font-size:14px;letter-spacing:.18em;
+    color:var(--red);
+    border:2px solid var(--red);
+    padding:6px 14px 5px;
+    margin-bottom:20px;
+  }
+  .age-gate-title{
+    font-family:"Anton",sans-serif;
+    font-size:36px;letter-spacing:-.01em;line-height:1;margin-bottom:8px;
+    color:var(--ink);text-transform:uppercase;
+  }
+  .age-gate-title em{color:var(--red);font-style:italic;font-family:"Fraunces",serif;font-weight:900;}
+  .age-gate-sub{
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.2em;
+    color:var(--ink-soft);text-transform:uppercase;margin-bottom:24px;
+  }
+  .age-gate-text{
+    font-family:"Shippori Mincho",serif;font-size:14px;line-height:1.8;
+    color:var(--ink);margin-bottom:24px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;
+  }
+  .age-gate-text strong{color:var(--gold);}
+  .age-gate-q{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.1em;
+    margin-bottom:14px;color:var(--ink);
+  }
+  .age-gate-buttons{display:flex;gap:12px;justify-content:center;}
+  .age-btn{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;cursor:pointer;
+    padding:13px 24px 11px;border:1.5px solid var(--ink);
+    transition: all .2s ease;
+  }
+  .age-btn.yes{background:var(--ink);color:var(--paper);}
+  .age-btn.yes:hover{background:var(--red);border-color:var(--red);color:var(--ink);transform:translateY(-2px);box-shadow:3px 3px 0 var(--red-deep);}
+  .age-btn.no{background:transparent;color:var(--ink-soft);border-color:var(--ink-soft);}
+  .age-btn.no:hover{color:var(--ink);border-color:var(--ink);}
+  .age-gate-foot{
+    margin-top:18px;font-family:"Fraunces",serif;font-style:italic;
+    font-size:11px;color:var(--ink-soft);
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding:14px 24px 12px;
+    background:var(--paper);
+    position:sticky;top:0;z-index:50;
+  }
+  .masthead-top{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:"Anton",sans-serif;letter-spacing:.05em;
+    text-transform:uppercase;font-size:11px;color:var(--ink-soft);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+  }
+  .masthead-top .meta-l, .masthead-top .meta-r{display:flex;gap:14px;align-items:center;}
+  .masthead-top .dot{width:6px;height:6px;background:var(--red);border-radius:50%;display:inline-block;margin-right:6px;vertical-align:1px;}
+  .masthead-top .r18-badge{
+    background:var(--red);color:var(--ink);
+    padding:2px 7px 1px;
+    font-size:10px;letter-spacing:.1em;
+  }
+  .masthead-title{
+    font-family:"Anton",sans-serif;
+    font-size:clamp(48px, 11vw, 138px);
+    line-height:.85;letter-spacing:-0.02em;
+    text-align:center;
+    color:var(--ink);
+    text-transform:uppercase;
+    margin:6px 0 4px;
+  }
+  .masthead-title .amp{
+    color:var(--red);
+    font-family:"Fraunces",serif;
+    font-style:italic;font-weight:900;
+    padding:0 .04em;
+  }
+  .masthead-title a{display:inline-block;}
+  .masthead-bottom{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-top:1px solid var(--line);padding-top:8px;
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:13px;color:var(--ink-soft);
+  }
+  .masthead-bottom .tagline{font-weight:400;}
+  .masthead-bottom .issue{font-family:"Anton",sans-serif;font-style:normal;letter-spacing:.08em;font-size:11px;color:var(--ink);}
+
+  /* ============ NAVIGATION TABS ============ */
+  .nav-tabs{
+    display:flex;justify-content:center;gap:0;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+    padding:10px 24px 0;
+  }
+  .nav-tab{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);
+    padding:10px 24px 12px;
+    border-bottom:2px solid transparent;
+    transition: all .18s ease;
+    text-decoration:none;
+  }
+  .nav-tab:hover{color:var(--ink);}
+  .nav-tab.is-active{color:var(--ink);border-bottom-color:var(--red);}
+  .nav-tab .small{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
+    font-size:10px;letter-spacing:.04em;
+    color:var(--ink-soft);text-transform:none;
+    margin-left:6px;
+  }
+
+  /* ============ PAGE HEADER ============ */
+  .page-header{
+    padding:32px 24px 24px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .page-header h1{
+    font-family:"Fraunces",serif;font-weight:900;
+    font-size:clamp(32px, 6vw, 52px);letter-spacing:-.02em;
+    margin-bottom:8px;
+  }
+  .page-header h1 em{font-style:italic;color:var(--red);}
+  .page-header .sub{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:300;
+    font-size:14px;color:var(--ink-soft);
+  }
+
+  /* ============ QUICK LIST ============ */
+  .quick-list{
+    max-width:760px;margin:0 auto;
+    padding:28px 24px 80px;
+  }
+  .quick-item{
+    display:grid;
+    grid-template-columns:88px 1fr;
+    gap:18px;
+    padding:22px 0;
+    border-bottom:1px dashed var(--line);
+    opacity:0;transform:translateY(8px);
+    animation:rise .5s ease forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .quick-item:last-child{border-bottom:none;}
+
+  .quick-thumb{
+    width:88px;height:132px;
+    overflow:hidden;
+    border:1.5px solid var(--ink);
+    position:relative;
+    background:#0A070A;
+  }
+  .quick-thumb img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:right center;
+  }
+
+  .quick-body{
+    display:flex;flex-direction:column;
+    justify-content:space-between;
+    min-width:0;
+  }
+  .quick-meta-row{
+    display:flex;align-items:center;gap:10px;
+    font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-soft);
+    margin-bottom:6px;flex-wrap:wrap;
+  }
+  .quick-meta-row .code{color:var(--gold);}
+  .quick-meta-row .date{color:var(--ink-soft);opacity:.7;}
+  .quick-meta-row .divider{opacity:.4;}
+
+  .quick-actress{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:18px;letter-spacing:.02em;line-height:1.2;
+    color:var(--ink);margin-bottom:4px;
+  }
+  .quick-studio{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:300;
+    font-size:12px;color:var(--ink-soft);margin-bottom:10px;
+  }
+  .quick-memo{
+    font-family:"Shippori Mincho",serif;font-weight:500;
+    font-size:14px;line-height:1.75;color:var(--ink);
+    margin-bottom:10px;
+  }
+  .quick-footer{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-top:auto;
+  }
+  .quick-tags{
+    display:flex;gap:6px;flex-wrap:wrap;
+  }
+  .quick-tag{
+    font-family:"Anton",sans-serif;font-size:9px;letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:3px 8px 2px;border:1px solid var(--line);
+    background:transparent;color:var(--ink-soft);
+    border-radius:999px;
+  }
+  .quick-tag.accent{color:var(--gold);border-color:var(--gold);}
+
+  .quick-link{
+    margin-left:auto;
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:6px 12px 5px;
+    background:#FF2E8E;color:var(--ink);
+    border:1px solid var(--ink);
+    text-decoration:none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .quick-link:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--velvet);}
+
+  @media (max-width: 560px){
+    .quick-item{grid-template-columns:72px 1fr;gap:14px;}
+    .quick-thumb{width:72px;height:108px;}
+    .quick-actress{font-size:16px;}
+    .quick-memo{font-size:13px;}
+    .quick-link{margin-left:0;margin-top:6px;width:fit-content;}
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    border-top:2px solid var(--ink);
+    padding:28px 24px;text-align:center;
+    background:#0A070A;color:var(--ink);
+    font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  footer .red{color:var(--red);}
+  footer .small{
+    display:block;margin-top:10px;font-family:"Fraunces",serif;
+    font-style:italic;font-size:13px;letter-spacing:0;
+    text-transform:none;font-weight:300;color:var(--ink-soft);
+    max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6;
+  }
+  footer .r18-disclaimer{
+    margin-top:18px;padding-top:14px;
+    border-top:1px solid rgba(244,236,221,.1);
+    font-family:"DM Sans",sans-serif;font-size:10px;letter-spacing:.12em;
+    color:var(--red);
+  }
+  footer a{color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;}
+
+  .empty-state{
+    text-align:center;padding:80px 24px;
+    font-family:"Fraunces",serif;font-style:italic;font-size:18px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<!-- AGE GATE -->
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-inner">
+    <div class="age-gate-r18">R18 ADULT CONTENT</div>
+    <div class="age-gate-title">Velvet<em>&amp;</em>Press</div>
+    <div class="age-gate-sub">— after-hours review magazine</div>
+    <div class="age-gate-text">
+      当サイトはアダルト作品のレビューを掲載する<strong>成人向けサイト</strong>です。<br>
+      18歳未満の方の閲覧は固くお断りいたします。
+    </div>
+    <div class="age-gate-q">あなたは18歳以上ですか？</div>
+    <div class="age-gate-buttons">
+      <button class="age-btn yes" id="ageYes">はい(18歳以上)</button>
+      <button class="age-btn no" id="ageNo">いいえ</button>
+    </div>
+    <div class="age-gate-foot">YESを選択した時点で、当サイト規約に同意したものとみなします。</div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="meta-l">
+      <span><span class="dot"></span>Adult · Reviews · Personal Log</span>
+      <span class="r18-badge">R18</span>
+    </div>
+    <div class="meta-r">
+      <span style="opacity:.7;">EDITOR'S NOTE</span>
+    </div>
+  </div>
+  <h1 class="masthead-title"><a href="index.html">Velvet<span class="amp">&amp;</span>Press</a></h1>
+  <div class="masthead-bottom">
+    <div class="tagline">— in praise of the women who light up the night.</div>
+    <div class="issue">100 / 100 SCORING SYSTEM</div>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <a href="index.html" class="nav-tab">Reviews <span class="small">本批評</span></a>
+  <a href="quick.html" class="nav-tab is-active">Quick <span class="small">編集後記</span></a>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Quick <em>Reviews</em></h1>
+  <div class="sub">— editor's notebook · 観た作品の一言メモ</div>
+</section>
+
+<!-- QUICK LIST -->
+<section class="quick-list" id="quickList"></section>
+
+<footer>
+  © VELVET <span class="red">&amp;</span> PRESS · Est. 2026
+  <span class="small">本サイトに掲載しているレビューは個人的な感想です。配信状況は時期により変動するため、リンク先で最新情報をご確認ください。</span>
+  <span class="small" style="margin-top:14px;">
+    <a href="index.html">Reviews</a>
+    &nbsp;·&nbsp;
+    <a href="about.html">About</a>
+    &nbsp;·&nbsp;
+    <a href="privacy.html">プライバシーポリシー</a>
+  </span>
+  <div class="r18-disclaimer">⚠ 本サイトは18歳未満閲覧禁止のアダルトコンテンツを含みます</div>
+</footer>
+
+<script>
+/*__QUICKS_DATA__*/
+
+// ============ AGE GATE ============
+const ageGate = document.getElementById("ageGate");
+const STORAGE_KEY = "vlv_age_verified";
+function checkAgeGate(){
+  try{ if(localStorage.getItem(STORAGE_KEY) === "1") ageGate.classList.add("is-hidden"); }catch(e){}
+}
+document.getElementById("ageYes").addEventListener("click", () => {
+  try{ localStorage.setItem(STORAGE_KEY, "1"); }catch(e){}
+  ageGate.classList.add("is-hidden");
+});
+document.getElementById("ageNo").addEventListener("click", () => {
+  window.location.href = "https://www.google.com";
+});
+checkAgeGate();
+
+// ============ RENDER ============
+function formatDate(dateStr){
+  if(!dateStr) return "";
+  const d = new Date(dateStr);
+  if(isNaN(d)) return dateStr;
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+}
+
+function renderQuicks(){
+  const list = document.getElementById("quickList");
+  if(!quicks || quicks.length === 0){
+    list.innerHTML = '<div class="empty-state">準備中です。近日公開予定。</div>';
+    return;
+  }
+
+  // 新しい順にソート(date降順)
+  const sorted = [...quicks].sort((a, b) => {
+    const da = new Date(a.date || "1970-01-01");
+    const db = new Date(b.date || "1970-01-01");
+    return db - da;
+  });
+
+  list.innerHTML = "";
+  sorted.forEach((q, i) => {
+    const item = document.createElement("div");
+    item.className = "quick-item";
+    item.style.animationDelay = `${i * 0.04}s`;
+
+    const tagsHtml = (q.tags || []).map((t, idx) =>
+      `<span class="quick-tag${idx === 0 ? ' accent' : ''}">#${t}</span>`
+    ).join("");
+
+    const linkHtml = q.fanzaUrl
+      ? `<a href="${q.fanzaUrl}" class="quick-link" target="_blank" rel="noopener sponsored">FANZA ↗</a>`
+      : "";
+
+    item.innerHTML = `
+      <a href="${q.fanzaUrl || '#'}" class="quick-thumb" target="_blank" rel="noopener sponsored">
+        <img src="${q.packageImage}" alt="${q.title || q.actress}" loading="lazy">
+      </a>
+      <div class="quick-body">
+        <div class="quick-meta-row">
+          <span class="code">${q.code}</span>
+          <span class="divider">·</span>
+          <span class="date">${formatDate(q.date)}</span>
+        </div>
+        <div class="quick-actress">${q.actress}</div>
+        <div class="quick-studio">${q.studio}</div>
+        <div class="quick-memo">${q.memo}</div>
+        <div class="quick-footer">
+          <div class="quick-tags">${tagsHtml}</div>
+          ${linkHtml}
+        </div>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+renderQuicks();
+</script>
+</body>
+</html>
