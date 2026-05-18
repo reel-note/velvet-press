@@ -1,0 +1,14 @@
+[
+  {
+    "id": "q001",
+    "code": "EXAMPLE-001",
+    "title": "サンプル作品タイトル(削除予定)",
+    "actress": "サンプル女優",
+    "studio": "サンプルメーカー",
+    "memo": "ここに120字以内のクイックレビューを書く。観た直後の感想を率直に。新治さんの批評眼を活かしつつ、軽やかなトーンで。",
+    "tags": ["サンプル", "DELETE-ME"],
+    "packageImage": "https://pics.dmm.co.jp/digital/video/example/exampleps.jpg",
+    "fanzaUrl": "https://al.fanza.co.jp/?lurl=...&af_id=VELVETPRESS-001",
+    "date": "2026-05-15"
+  }
+]
