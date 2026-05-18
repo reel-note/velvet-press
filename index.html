@@ -152,6 +152,30 @@
   .masthead-bottom .tagline{font-weight:400;}
   .masthead-bottom .issue{font-family:"Anton",sans-serif;font-style:normal;letter-spacing:.08em;font-size:11px;color:var(--ink);}
 
+  /* ============ NAV TABS ============ */
+  .nav-tabs{
+    display:flex;justify-content:center;gap:0;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+    padding:10px 24px 0;
+  }
+  .nav-tab{
+    font-family:"Anton",sans-serif;font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);
+    padding:10px 24px 12px;
+    border-bottom:2px solid transparent;
+    transition: all .18s ease;
+    text-decoration:none;
+  }
+  .nav-tab:hover{color:var(--ink);}
+  .nav-tab.is-active{color:var(--ink);border-bottom-color:var(--red);}
+  .nav-tab .small{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
+    font-size:10px;letter-spacing:.04em;
+    color:var(--ink-soft);text-transform:none;
+    margin-left:6px;
+  }
+
   /* ============ ISSUE SELECTOR ============ */
   .masthead-top .meta-r{position:relative;}
   .issue-selector{
@@ -285,7 +309,7 @@
     position:absolute;inset:0;
     width:100%;height:100%;
     object-fit:cover;
-    object-position:right center;
+    object-position:center;
     display:block;
   }
   .poster{background:#0A070A;}
@@ -599,6 +623,12 @@
   </div>
 </header>
 
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <a href="index.html" class="nav-tab is-active">Reviews <span class="small">本批評</span></a>
+  <a href="quick.html" class="nav-tab">Quick <span class="small">編集後記</span></a>
+</nav>
+
 <!-- =================== GRID VIEW =================== -->
 <section class="grid-view" id="gridView">
   <div class="filter-bar">
@@ -674,6 +704,8 @@
   © VELVET <span class="red">&amp;</span> PRESS · Est. 2026
   <span class="small">本サイトに掲載しているレビューは個人的な感想です。配信状況は時期により変動するため、リンク先で最新情報をご確認ください。</span>
   <span class="small" style="margin-top:14px;">
+    <a href="quick.html" style="color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;">Quick Reviews</a>
+    &nbsp;·&nbsp;
     <a href="about.html" style="color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;">About</a>
     &nbsp;·&nbsp;
     <a href="privacy.html" style="color:var(--ink);border-bottom:1px solid var(--ink-soft);text-decoration:none;">プライバシーポリシー</a>
