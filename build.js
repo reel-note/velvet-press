@@ -199,7 +199,60 @@ function generateSitemap(reviews) {
   return xml.join('\n');
 }
 
-// ============ ビルド ============
+// ============ QUICK REVIEWS 検証 ============
+function validateQuicks(quicks) {
+  const errors = [];
+  if (!Array.isArray(quicks)) {
+    errors.push('❌ quicks.json はJSON配列でなければなりません');
+    return errors;
+  }
+  const requiredFields = ['id', 'code', 'actress', 'studio', 'memo', 'packageImage', 'date'];
+  quicks.forEach((q, i) => {
+    const prefix = `❌ クイック #${i + 1} (${q.code || q.id || '未設定'}):`;
+    requiredFields.forEach(field => {
+      if (q[field] === undefined || q[field] === null || q[field] === '') {
+        errors.push(`${prefix} "${field}" が未設定です`);
+      }
+    });
+    if (q.memo && q.memo.length > 200) {
+      errors.push(`⚠️ ${prefix.replace('❌', '')} memo が長すぎます (推奨: 120字以内、現在: ${q.memo.length}字)`);
+    }
+    if (q.packageImage && !q.packageImage.startsWith('https://')) {
+      errors.push(`${prefix} packageImage は https:// で始まる必要があります`);
+    }
+    if (q.fanzaUrl && !q.fanzaUrl.startsWith('https://')) {
+      errors.push(`${prefix} fanzaUrl は https:// で始まる必要があります`);
+    }
+  });
+  const ids = quicks.map(q => q.id);
+  const duplicates = ids.filter((c, i) => ids.indexOf(c) !== i);
+  if (duplicates.length > 0) {
+    errors.push(`❌ 重複したIDがあります: ${[...new Set(duplicates)].join(', ')}`);
+  }
+  return errors;
+}
+
+// ============ QUICK データ生成 ============
+function generateQuicksData(quicks) {
+  const escape = (s) => (s || '').toString().replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+  const lines = ['// ============ QUICK DATA (auto-generated) ============'];
+  lines.push('const quicks = [');
+  quicks.forEach((q, i) => {
+    const tagsStr = (q.tags || []).map(t => `"${escape(t)}"`).join(',');
+    let line = `  {id:"${escape(q.id)}", code:"${escape(q.code)}", title:"${escape(q.title || '')}", actress:"${escape(q.actress)}", studio:"${escape(q.studio)}",`;
+    line += `\n    memo:"${escape(q.memo)}",`;
+    line += `\n    tags:[${tagsStr}],`;
+    line += `\n    packageImage:"${escape(q.packageImage)}",`;
+    line += `\n    fanzaUrl:"${escape(q.fanzaUrl || '')}",`;
+    line += `\n    date:"${escape(q.date)}"`;
+    line += `}${i < quicks.length - 1 ? ',' : ''}`;
+    lines.push(line);
+  });
+  lines.push('];');
+  return lines.join('\n');
+}
+
+// ============ ビルド (本レビュー) ============
 const dataSection = generateDataSection(reviews);
 
 const filmIssuesLines = ['const filmIssues = {'];
@@ -216,6 +269,38 @@ output = output.replace('/*__FILM_ISSUES__*/', filmIssuesLines.join('\n'));
 fs.writeFileSync('index.html', output, 'utf8');
 console.log(`✅ index.html を生成しました (${reviews.length} 作品)`);
 
+// ============ ビルド (クイックレビュー) ============
+let quicks = [];
+let quickTemplate = '';
+try {
+  quicks = JSON.parse(fs.readFileSync('quicks.json', 'utf8'));
+} catch (e) {
+  console.warn('⚠️  quicks.json が見つかりません。クイックレビューはスキップします');
+}
+
+try {
+  quickTemplate = fs.readFileSync('quick-template.html', 'utf8');
+} catch (e) {
+  console.warn('⚠️  quick-template.html が見つかりません。クイックレビューはスキップします');
+}
+
+if (quicks.length > 0 && quickTemplate) {
+  console.log('🔍 quicks.json を検証中...');
+  const quickErrors = validateQuicks(quicks);
+  if (quickErrors.length > 0) {
+    console.error('\n===== クイックレビュー検証エラー =====');
+    quickErrors.forEach(err => console.error(err));
+    process.exit(1);
+  }
+  console.log(`✅ クイック検証OK (${quicks.length} 件)`);
+
+  const quicksData = generateQuicksData(quicks);
+  const quickOutput = quickTemplate.replace('/*__QUICKS_DATA__*/', quicksData);
+  fs.writeFileSync('quick.html', quickOutput, 'utf8');
+  console.log(`✅ quick.html を生成しました (${quicks.length} 件)`);
+}
+
+// ============ sitemap ============
 const sitemap = generateSitemap(reviews);
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 console.log(`✅ sitemap.xml を生成しました`);
