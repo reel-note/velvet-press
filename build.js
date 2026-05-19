@@ -132,7 +132,8 @@ function generateDataSection(reviews) {
     line += `\n    lead:"${escape(r.lead)}",`;
     line += `\n    body:${bodyStr},`;
     line += `\n    tags:[${tagsStr}],`;
-    line += `\n    packageImage:"${escape(r.packageImage)}"`;
+    line += `\n    packageImage:"${escape(r.packageImage)}",`;
+    line += `\n    tagline:"${escape(r.tagline || '')}"`;
     line += `}${i < reviews.length - 1 ? ',' : ''}`;
     lines.push(line);
   });
