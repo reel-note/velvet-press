@@ -23,7 +23,7 @@ function validateReviews(reviews) {
   }
 
   const requiredFields = ['code', 'title', 'actress', 'studio', 'year', 'runtime', 'score', 'verdict', 'genre', 'lead', 'body1', 'body2', 'tags', 'fanzaUrl', 'packageImage'];
-  const validGenres = ['単体', '企画', 'ドラマ', 'ロマンス', 'シチュエーション'];
+  const validGenres = ['単体', '企画', 'シチュエーション', '主観', 'フェラ・口淫', '騎乗位', '顔射・ぶっかけ', '潮吹き', 'アクメ・絶頂', '乱交・複数', '巨乳', 'スレンダー', '美少女', '熟女・人妻', 'コスプレ'];
 
   reviews.forEach((r, i) => {
     const prefix = `❌ 作品 #${i + 1} (${r.code || 'コード未設定'}):`;
