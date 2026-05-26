@@ -8,6 +8,9 @@
 <meta name="rating" content="adult">
 <meta name="robots" content="noindex,nofollow">
 
+<!-- X共有画像生成用ライブラリ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <!-- ============ OGP (SNS共有時の見栄え) ============ -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VELVET&PRESS">
@@ -352,6 +355,166 @@
   .detail-view{display:none;background:var(--paper);position:relative;z-index:1;}
   .detail-view.is-active{display:block;}
   .grid-view.is-hidden{display:none;}
+
+  /* ============ X共有ボタン ============ */
+  .share-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    width:100%;margin:18px 0 4px;
+    padding:14px 20px;
+    background:var(--paper-2);
+    color:var(--ink);
+    border:1.5px solid var(--gold);
+    font-family:"DM Sans","Shippori Mincho",sans-serif;
+    font-size:14px;font-weight:700;letter-spacing:.06em;
+    cursor:pointer;
+    transition:all .18s ease;
+  }
+  .share-btn:hover{background:var(--gold);color:var(--paper);}
+  .share-btn:disabled{opacity:.5;cursor:wait;}
+  .share-btn .share-ico{font-size:15px;}
+
+  /* ============ X共有カード(撮影用) ============ */
+  #shareCardWrap{
+    position:fixed;left:-9999px;top:0;
+    width:1080px;height:1350px;
+    pointer-events:none;
+  }
+  #shareCard{
+    width:1080px;height:1350px;
+    background:#1A1419;
+    position:relative;
+    font-family:"Shippori Mincho",serif;
+    overflow:hidden;
+  }
+  #shareCard .sc-frame{
+    position:absolute;inset:30px;
+    border:2px solid rgba(244,236,221,.20);
+  }
+  #shareCard .sc-corner{
+    position:absolute;width:44px;height:44px;z-index:3;
+  }
+  #shareCard .sc-corner::before,
+  #shareCard .sc-corner::after{
+    content:"";position:absolute;background:#C9A664;
+  }
+  #shareCard .sc-corner::before{width:100%;height:3px;}
+  #shareCard .sc-corner::after{width:3px;height:100%;}
+  #shareCard .sc-tl{top:30px;left:30px;}
+  #shareCard .sc-tr{top:30px;right:30px;}
+  #shareCard .sc-tr::before{right:0;}
+  #shareCard .sc-tr::after{right:0;}
+  #shareCard .sc-bl{bottom:30px;left:30px;}
+  #shareCard .sc-bl::before{bottom:0;}
+  #shareCard .sc-bl::after{bottom:0;}
+  #shareCard .sc-br{bottom:30px;right:30px;}
+  #shareCard .sc-br::before{bottom:0;right:0;}
+  #shareCard .sc-br::after{bottom:0;right:0;}
+
+  #shareCard .sc-header{
+    position:absolute;top:74px;left:0;right:0;
+    display:flex;align-items:center;justify-content:center;
+    gap:20px;
+  }
+  #shareCard .sc-brand{
+    font-family:"Anton",sans-serif;
+    font-size:62px;letter-spacing:.01em;
+    color:#F4ECDD;
+  }
+  #shareCard .sc-amp{
+    font-family:"Fraunces",serif;
+    font-weight:900;font-style:italic;
+    color:#D8344A;margin:0 2px;
+  }
+  #shareCard .sc-r18{
+    font-family:"Anton",sans-serif;
+    font-size:22px;letter-spacing:.1em;
+    color:#D8344A;
+    border:2.5px solid #D8344A;
+    padding:5px 11px 2px;
+    text-indent:.1em;
+  }
+  #shareCard .sc-kicker{
+    position:absolute;top:150px;left:0;right:0;
+    text-align:center;
+    font-family:"Anton",sans-serif;
+    font-size:19px;letter-spacing:.34em;
+    color:#A89889;
+    text-indent:.34em;
+  }
+
+  #shareCard .sc-poster-wrap{
+    position:absolute;top:212px;left:50%;
+    transform:translateX(-50%);
+    width:620px;height:620px;
+    overflow:hidden;
+    border:1px solid rgba(201,166,100,.4);
+  }
+  #shareCard .sc-poster{
+    width:100%;height:100%;
+    object-fit:cover;object-position:right center;
+    display:block;
+  }
+
+  #shareCard .sc-score-row{
+    position:absolute;top:880px;left:90px;right:90px;
+    display:flex;align-items:center;gap:24px;
+  }
+  #shareCard .sc-score{
+    font-family:"Anton",sans-serif;
+    color:#D8344A;
+    line-height:1;
+    display:flex;align-items:baseline;
+  }
+  #shareCard .sc-score span:first-child{font-size:104px;}
+  #shareCard .sc-score-max{
+    font-size:34px;color:#A89889;margin-left:4px;
+  }
+  #shareCard .sc-score-line{
+    flex:1;height:2px;
+    background:linear-gradient(90deg,rgba(201,166,100,.6),transparent);
+  }
+  #shareCard .sc-score-label{
+    font-family:"Anton",sans-serif;
+    font-size:18px;letter-spacing:.18em;
+    color:#A89889;line-height:1.4;
+    text-align:right;
+  }
+
+  #shareCard .sc-verdict{
+    position:absolute;top:1010px;left:90px;right:90px;
+    font-family:"Shippori Mincho",serif;
+    font-weight:800;
+    font-size:38px;line-height:1.55;
+    color:#F4ECDD;
+    text-align:left;
+  }
+  #shareCard .sc-verdict::before{
+    content:"\201C ";color:#C9A664;
+  }
+  #shareCard .sc-verdict::after{
+    content:" \201D";color:#C9A664;
+  }
+
+  #shareCard .sc-divider{
+    position:absolute;top:1218px;left:90px;right:90px;
+    display:flex;align-items:center;gap:16px;
+  }
+  #shareCard .sc-d-line{
+    flex:1;height:1px;background:rgba(201,166,100,.5);
+  }
+  #shareCard .sc-diamond{
+    width:8px;height:8px;background:#C9A664;
+    transform:rotate(45deg);
+  }
+
+  #shareCard .sc-meta{
+    position:absolute;top:1252px;left:90px;right:90px;
+    text-align:center;
+    font-family:"Anton",sans-serif;
+    font-size:21px;letter-spacing:.14em;
+    color:#A89889;
+    text-indent:.14em;
+  }
 
   .detail-back{
     display:inline-flex;align-items:center;gap:8px;
@@ -725,6 +888,10 @@
         <div class="stream-buttons" id="dStreams"></div>
       </div>
 
+      <button class="share-btn" id="shareBtn">
+        <span class="share-ico">⬇</span> X共有用カードを保存
+      </button>
+
       <p class="detail-lead" id="dLead"></p>
       <div class="detail-body" id="dBody"></div>
 
@@ -732,6 +899,43 @@
     </div>
   </div>
 </section>
+
+<!-- ============ X共有カード(画面外・撮影用) ============ -->
+<div id="shareCardWrap" aria-hidden="true">
+  <div id="shareCard">
+    <div class="sc-frame"></div>
+    <div class="sc-corner sc-tl"></div>
+    <div class="sc-corner sc-tr"></div>
+    <div class="sc-corner sc-bl"></div>
+    <div class="sc-corner sc-br"></div>
+
+    <div class="sc-header">
+      <div class="sc-brand">VELVET<span class="sc-amp">&amp;</span>PRESS</div>
+      <div class="sc-r18">R18</div>
+    </div>
+    <div class="sc-kicker">AFTER-HOURS REVIEW MAGAZINE</div>
+
+    <div class="sc-poster-wrap">
+      <img id="scImage" class="sc-poster" src="" alt="">
+    </div>
+
+    <div class="sc-score-row">
+      <div class="sc-score"><span id="scScoreNum">95</span><span class="sc-score-max">/100</span></div>
+      <div class="sc-score-line"></div>
+      <div class="sc-score-label">EDITOR'S<br>SCORE</div>
+    </div>
+
+    <div class="sc-verdict" id="scVerdict"></div>
+
+    <div class="sc-divider">
+      <span class="sc-d-line"></span>
+      <span class="sc-diamond"></span>
+      <span class="sc-d-line"></span>
+    </div>
+
+    <div class="sc-meta" id="scMeta"></div>
+  </div>
+</div>
 
 <footer>
   © VELVET <span class="red">&amp;</span> PRESS · Est. 2026
@@ -932,8 +1136,10 @@ function updateCounts(){
 }
 
 // ============ DETAIL VIEW ============
+let currentFilm = null;
 function goToDetail(id){
   const f = films.find(x => x.id === id); if(!f) return;
+  currentFilm = f;
   document.getElementById("dCategory").textContent = f.genre.join(" · ");
   document.getElementById("dIssueDate").textContent = `${f.code} · ${f.year}年`;
   document.getElementById("dTitle").textContent = f.title;
@@ -974,6 +1180,59 @@ function goToGrid(){
 }
 document.getElementById("backBtn").addEventListener("click", goToGrid);
 document.getElementById("miniBackBtn").addEventListener("click", goToGrid);
+
+// ============ X共有カード生成 ============
+const shareBtn = document.getElementById("shareBtn");
+shareBtn.addEventListener("click", async () => {
+  if(!currentFilm || typeof html2canvas === "undefined") return;
+  const f = currentFilm;
+  const origLabel = shareBtn.innerHTML;
+  shareBtn.disabled = true;
+  shareBtn.innerHTML = '<span class="share-ico">⏳</span> 画像を生成中…';
+
+  // カードにデータを流し込む
+  document.getElementById("scScoreNum").textContent = f.score;
+  document.getElementById("scVerdict").textContent = f.verdict;
+  document.getElementById("scMeta").textContent = `${f.actress}　·　${f.code}`;
+
+  const scImg = document.getElementById("scImage");
+
+  // パッケージ画像をCORS対応で読み込み
+  await new Promise((resolve) => {
+    const probe = new Image();
+    probe.crossOrigin = "anonymous";
+    probe.onload = () => { scImg.crossOrigin = "anonymous"; scImg.src = f.packageImage; resolve(); };
+    probe.onerror = () => { scImg.src = f.packageImage; resolve(); };
+    probe.src = f.packageImage;
+  });
+  await new Promise(r => setTimeout(r, 300));
+
+  try{
+    const canvas = await html2canvas(document.getElementById("shareCard"), {
+      width: 1080, height: 1350, scale: 2,
+      backgroundColor: "#1A1419",
+      useCORS: true, allowTaint: false, logging: false
+    });
+    canvas.toBlob((blob) => {
+      if(!blob){ throw new Error("blob failed"); }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `velvet-press_${f.code}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      shareBtn.disabled = false;
+      shareBtn.innerHTML = '<span class="share-ico">✓</span> 保存しました';
+      setTimeout(() => { shareBtn.innerHTML = origLabel; }, 2500);
+    }, "image/png");
+  }catch(err){
+    shareBtn.disabled = false;
+    shareBtn.innerHTML = '<span class="share-ico">⚠</span> 生成に失敗しました';
+    setTimeout(() => { shareBtn.innerHTML = origLabel; }, 2500);
+  }
+});
 window.addEventListener("popstate", () => {
   const hash = location.hash;
   if(hash.startsWith("#/work/")){
