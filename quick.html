@@ -8,6 +8,9 @@
 <meta name="rating" content="adult">
 <meta name="robots" content="noindex,nofollow">
 
+<!-- X共有画像生成用ライブラリ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <!-- OGP -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VELVET&PRESS">
@@ -314,6 +317,117 @@
     font-family:"Fraunces",serif;font-style:italic;font-size:18px;
     color:var(--ink-soft);
   }
+
+  /* ============ X共有ボタン ============ */
+  .quick-share-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:10px;
+    padding:7px 14px;
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    font-family:"DM Sans","Shippori Mincho",sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+    cursor:pointer;
+    transition:all .18s ease;
+  }
+  .quick-share-btn:hover{background:var(--gold);color:var(--paper);}
+  .quick-share-btn:disabled{opacity:.5;cursor:wait;}
+
+  /* ============ X共有カード(撮影用) ============ */
+  #qShareWrap{
+    position:fixed;left:-9999px;top:0;
+    width:1080px;height:1350px;pointer-events:none;
+  }
+  #qShareCard{
+    width:1080px;height:1350px;
+    background:#1A1419;position:relative;
+    font-family:"Shippori Mincho",serif;overflow:hidden;
+  }
+  #qShareCard .sc-frame{
+    position:absolute;inset:30px;
+    border:2px solid rgba(244,236,221,.20);
+  }
+  #qShareCard .sc-corner{position:absolute;width:44px;height:44px;z-index:3;}
+  #qShareCard .sc-corner::before,
+  #qShareCard .sc-corner::after{content:"";position:absolute;background:#C9A664;}
+  #qShareCard .sc-corner::before{width:100%;height:3px;}
+  #qShareCard .sc-corner::after{width:3px;height:100%;}
+  #qShareCard .sc-tl{top:30px;left:30px;}
+  #qShareCard .sc-tr{top:30px;right:30px;}
+  #qShareCard .sc-tr::before{right:0;}
+  #qShareCard .sc-tr::after{right:0;}
+  #qShareCard .sc-bl{bottom:30px;left:30px;}
+  #qShareCard .sc-bl::before{bottom:0;}
+  #qShareCard .sc-bl::after{bottom:0;}
+  #qShareCard .sc-br{bottom:30px;right:30px;}
+  #qShareCard .sc-br::before{bottom:0;right:0;}
+  #qShareCard .sc-br::after{bottom:0;right:0;}
+
+  #qShareCard .sc-header{
+    position:absolute;top:74px;left:0;right:0;
+    display:flex;align-items:center;justify-content:center;gap:20px;
+  }
+  #qShareCard .sc-brand{
+    font-family:"Anton",sans-serif;font-size:62px;color:#F4ECDD;
+  }
+  #qShareCard .sc-amp{
+    font-family:"Fraunces",serif;font-weight:900;font-style:italic;
+    color:#D8344A;margin:0 2px;
+  }
+  #qShareCard .sc-r18{
+    font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.1em;
+    color:#D8344A;border:2.5px solid #D8344A;
+    padding:5px 11px 2px;text-indent:.1em;
+  }
+  #qShareCard .sc-kicker{
+    position:absolute;top:150px;left:0;right:0;text-align:center;
+    font-family:"Anton",sans-serif;font-size:19px;letter-spacing:.34em;
+    color:#C9A664;text-indent:.34em;
+  }
+
+  #qShareCard .sc-poster-wrap{
+    position:absolute;top:212px;left:50%;transform:translateX(-50%);
+    width:560px;height:560px;overflow:hidden;
+    border:1px solid rgba(201,166,100,.4);
+  }
+  #qShareCard .sc-poster{
+    width:100%;height:100%;
+    object-fit:cover;object-position:right center;display:block;
+  }
+
+  #qShareCard .sc-quicklabel{
+    position:absolute;top:812px;left:90px;right:90px;
+    display:flex;align-items:center;gap:18px;
+  }
+  #qShareCard .sc-quicklabel .ql-text{
+    font-family:"Anton",sans-serif;font-size:30px;letter-spacing:.16em;
+    color:#D8344A;text-indent:.16em;white-space:nowrap;
+  }
+  #qShareCard .sc-quicklabel .ql-line{
+    flex:1;height:2px;
+    background:linear-gradient(90deg,rgba(201,166,100,.6),transparent);
+  }
+
+  #qShareCard .sc-memo{
+    position:absolute;top:880px;left:90px;right:90px;
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:36px;line-height:1.7;color:#F4ECDD;text-align:left;
+  }
+
+  #qShareCard .sc-divider{
+    position:absolute;top:1218px;left:90px;right:90px;
+    display:flex;align-items:center;gap:16px;
+  }
+  #qShareCard .sc-d-line{flex:1;height:1px;background:rgba(201,166,100,.5);}
+  #qShareCard .sc-diamond{
+    width:8px;height:8px;background:#C9A664;transform:rotate(45deg);
+  }
+  #qShareCard .sc-meta{
+    position:absolute;top:1252px;left:90px;right:90px;text-align:center;
+    font-family:"Anton",sans-serif;font-size:21px;letter-spacing:.14em;
+    color:#A89889;text-indent:.14em;
+  }
 </style>
 </head>
 <body>
@@ -486,13 +600,105 @@ function renderQuicks(){
           <div class="quick-tags">${tagsHtml}</div>
           ${linkHtml}
         </div>
+        <button class="quick-share-btn" data-qid="${q.id}">⬇ X共有用カードを保存</button>
       </div>
     `;
     list.appendChild(item);
   });
+
+  // シェアボタンのイベント登録
+  list.querySelectorAll(".quick-share-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const q = quicks.find(x => x.id === btn.dataset.qid);
+      if(q) generateQuickShareImage(q, btn);
+    });
+  });
+}
+
+// ============ X共有カード生成 ============
+async function generateQuickShareImage(q, btn){
+  if(typeof html2canvas === "undefined") return;
+  const origLabel = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = "⏳ 生成中…";
+
+  document.getElementById("qScMemo").textContent = q.memo;
+  document.getElementById("qScMeta").textContent = `${q.actress}　·　${q.code}`;
+
+  const scImg = document.getElementById("qScImage");
+  await new Promise((resolve) => {
+    const probe = new Image();
+    probe.crossOrigin = "anonymous";
+    probe.onload = () => { scImg.crossOrigin = "anonymous"; scImg.src = q.packageImage; resolve(); };
+    probe.onerror = () => { scImg.src = q.packageImage; resolve(); };
+    probe.src = q.packageImage;
+  });
+  await new Promise(r => setTimeout(r, 300));
+
+  try{
+    const canvas = await html2canvas(document.getElementById("qShareCard"), {
+      width: 1080, height: 1350, scale: 2,
+      backgroundColor: "#1A1419",
+      useCORS: true, allowTaint: false, logging: false
+    });
+    canvas.toBlob((blob) => {
+      if(!blob) throw new Error("blob failed");
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `velvet-press_quick_${q.code}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      btn.disabled = false;
+      btn.innerHTML = "✓ 保存しました";
+      setTimeout(() => { btn.innerHTML = origLabel; }, 2500);
+    }, "image/png");
+  }catch(err){
+    btn.disabled = false;
+    btn.innerHTML = "⚠ 生成に失敗";
+    setTimeout(() => { btn.innerHTML = origLabel; }, 2500);
+  }
 }
 
 renderQuicks();
 </script>
+<!-- ============ X共有カード(画面外・撮影用) ============ -->
+<div id="qShareWrap" aria-hidden="true">
+  <div id="qShareCard">
+    <div class="sc-frame"></div>
+    <div class="sc-corner sc-tl"></div>
+    <div class="sc-corner sc-tr"></div>
+    <div class="sc-corner sc-bl"></div>
+    <div class="sc-corner sc-br"></div>
+
+    <div class="sc-header">
+      <div class="sc-brand">VELVET<span class="sc-amp">&amp;</span>PRESS</div>
+      <div class="sc-r18">R18</div>
+    </div>
+    <div class="sc-kicker">QUICK REVIEW — 編集後記</div>
+
+    <div class="sc-poster-wrap">
+      <img id="qScImage" class="sc-poster" src="" alt="">
+    </div>
+
+    <div class="sc-quicklabel">
+      <span class="ql-text">QUICK NOTE</span>
+      <span class="ql-line"></span>
+    </div>
+
+    <div class="sc-memo" id="qScMemo"></div>
+
+    <div class="sc-divider">
+      <span class="sc-d-line"></span>
+      <span class="sc-diamond"></span>
+      <span class="sc-d-line"></span>
+    </div>
+
+    <div class="sc-meta" id="qScMeta"></div>
+  </div>
+</div>
+
 </body>
 </html>
