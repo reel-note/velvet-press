@@ -323,16 +323,17 @@
     display:inline-flex;align-items:center;gap:6px;
     margin-top:10px;
     padding:7px 14px;
-    background:transparent;
-    color:var(--gold);
-    border:1px solid var(--gold);
-    font-family:"DM Sans","Shippori Mincho",sans-serif;
-    font-size:12px;font-weight:700;letter-spacing:.04em;
+    background:#0A0A0A;
+    color:var(--ink);
+    border:1.5px solid var(--ink);
+    font-family:"DM Sans",sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:.08em;
     cursor:pointer;
     transition:all .18s ease;
   }
-  .quick-share-btn:hover{background:var(--gold);color:var(--paper);}
-  .quick-share-btn:disabled{opacity:.5;cursor:wait;}
+  .quick-share-btn .qsb-x{font-size:15px;font-weight:900;}
+  .quick-share-btn:hover{background:var(--ink);color:var(--paper);}
+  .quick-share-btn:disabled{opacity:.55;cursor:wait;}
 
   /* ============ X共有カード(撮影用) ============ */
   #qShareWrap{
@@ -600,7 +601,7 @@ function renderQuicks(){
           <div class="quick-tags">${tagsHtml}</div>
           ${linkHtml}
         </div>
-        <button class="quick-share-btn" data-qid="${q.id}">⬇ X共有用カードを保存</button>
+        <button class="quick-share-btn" data-qid="${q.id}"><span class="qsb-x">𝕏</span> SHARE</button>
       </div>
     `;
     list.appendChild(item);
@@ -626,14 +627,14 @@ async function generateQuickShareImage(q, btn){
   document.getElementById("qScMeta").textContent = `${q.actress}　·　${q.code}`;
 
   const scImg = document.getElementById("qScImage");
+  const proxyUrl = "/img?url=" + encodeURIComponent(q.packageImage);
   await new Promise((resolve) => {
-    const probe = new Image();
-    probe.crossOrigin = "anonymous";
-    probe.onload = () => { scImg.crossOrigin = "anonymous"; scImg.src = q.packageImage; resolve(); };
-    probe.onerror = () => { scImg.src = q.packageImage; resolve(); };
-    probe.src = q.packageImage;
+    scImg.crossOrigin = "anonymous";
+    scImg.onload = () => resolve();
+    scImg.onerror = () => resolve();
+    scImg.src = proxyUrl;
   });
-  await new Promise(r => setTimeout(r, 300));
+  await new Promise(r => setTimeout(r, 400));
 
   try{
     const canvas = await html2canvas(document.getElementById("qShareCard"), {
