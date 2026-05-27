@@ -356,22 +356,30 @@
   .detail-view.is-active{display:block;}
   .grid-view.is-hidden{display:none;}
 
-  /* ============ X共有ボタン ============ */
+  /* ============ X共有ボタン(正方形・FANZA横配置) ============ */
   .share-btn{
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    width:100%;margin:18px 0 4px;
-    padding:14px 20px;
-    background:var(--paper-2);
+    display:inline-flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:2px;
+    align-self:stretch;
+    min-width:88px;
+    padding:10px 14px;
+    background:#0A0A0A;
     color:var(--ink);
-    border:1.5px solid var(--gold);
-    font-family:"DM Sans","Shippori Mincho",sans-serif;
-    font-size:14px;font-weight:700;letter-spacing:.06em;
+    border:2px solid var(--ink);
+    box-shadow:4px 4px 0 var(--velvet);
+    font-family:"DM Sans",sans-serif;
     cursor:pointer;
     transition:all .18s ease;
   }
-  .share-btn:hover{background:var(--gold);color:var(--paper);}
-  .share-btn:disabled{opacity:.5;cursor:wait;}
-  .share-btn .share-ico{font-size:15px;}
+  .share-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--velvet);}
+  .share-btn:disabled{opacity:.55;cursor:wait;}
+  .share-btn .share-x{
+    font-size:26px;font-weight:900;line-height:1;
+  }
+  .share-btn .share-txt{
+    font-size:10px;font-weight:700;letter-spacing:.14em;
+    text-indent:.14em;
+  }
 
   /* ============ X共有カード(撮影用) ============ */
   #shareCardWrap{
@@ -888,10 +896,6 @@
         <div class="stream-buttons" id="dStreams"></div>
       </div>
 
-      <button class="share-btn" id="shareBtn">
-        <span class="share-ico">⬇</span> X共有用カードを保存
-      </button>
-
       <p class="detail-lead" id="dLead"></p>
       <div class="detail-body" id="dBody"></div>
 
@@ -970,11 +974,13 @@ function renderChips(film){
 }
 function renderStreamButtons(film){
   const list = filmStreams[film.id] || [];
-  if(list.length === 0) return `<div style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:14px;">現在、主要な配信サービスでは取り扱いがありません。</div>`;
-  return list.map(k => {
+  const shareBtnHtml = `<button class="share-btn" id="shareBtn" aria-label="X共有用カードを保存"><span class="share-x">𝕏</span><span class="share-txt">SHARE</span></button>`;
+  if(list.length === 0) return `<div style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:14px;">現在、主要な配信サービスでは取り扱いがありません。</div>${shareBtnHtml}`;
+  const streamHtml = list.map(k => {
     const svc = services[k]; if(!svc) return "";
     return `<a class="stream-btn svc-${k}" href="${streamUrl(k, film)}" target="_blank" rel="noopener">${svc.name}<span class="arrow">↗</span></a>`;
   }).join("");
+  return streamHtml + shareBtnHtml;
 }
 
 // ============ ISSUES & GENRES ============
@@ -1182,13 +1188,14 @@ document.getElementById("backBtn").addEventListener("click", goToGrid);
 document.getElementById("miniBackBtn").addEventListener("click", goToGrid);
 
 // ============ X共有カード生成 ============
-const shareBtn = document.getElementById("shareBtn");
-shareBtn.addEventListener("click", async () => {
+document.addEventListener("click", async (e) => {
+  const shareBtn = e.target.closest("#shareBtn");
+  if(!shareBtn) return;
   if(!currentFilm || typeof html2canvas === "undefined") return;
+  if(shareBtn.disabled) return;
   const f = currentFilm;
-  const origLabel = shareBtn.innerHTML;
   shareBtn.disabled = true;
-  shareBtn.innerHTML = '<span class="share-ico">⏳</span> 画像を生成中…';
+  shareBtn.innerHTML = '<span class="share-x">⏳</span><span class="share-txt">生成中</span>';
 
   // カードにデータを流し込む
   document.getElementById("scScoreNum").textContent = f.score;
@@ -1197,15 +1204,20 @@ shareBtn.addEventListener("click", async () => {
 
   const scImg = document.getElementById("scImage");
 
-  // パッケージ画像をCORS対応で読み込み
+  // パッケージ画像をプロキシ経由で読み込み(CORS回避)
+  const proxyUrl = "/img?url=" + encodeURIComponent(f.packageImage);
   await new Promise((resolve) => {
-    const probe = new Image();
-    probe.crossOrigin = "anonymous";
-    probe.onload = () => { scImg.crossOrigin = "anonymous"; scImg.src = f.packageImage; resolve(); };
-    probe.onerror = () => { scImg.src = f.packageImage; resolve(); };
-    probe.src = f.packageImage;
+    scImg.crossOrigin = "anonymous";
+    scImg.onload = () => resolve();
+    scImg.onerror = () => resolve();
+    scImg.src = proxyUrl;
   });
-  await new Promise(r => setTimeout(r, 300));
+  await new Promise(r => setTimeout(r, 400));
+
+  const restore = () => {
+    shareBtn.disabled = false;
+    shareBtn.innerHTML = '<span class="share-x">𝕏</span><span class="share-txt">SHARE</span>';
+  };
 
   try{
     const canvas = await html2canvas(document.getElementById("shareCard"), {
@@ -1214,7 +1226,7 @@ shareBtn.addEventListener("click", async () => {
       useCORS: true, allowTaint: false, logging: false
     });
     canvas.toBlob((blob) => {
-      if(!blob){ throw new Error("blob failed"); }
+      if(!blob){ restore(); return; }
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -1224,13 +1236,13 @@ shareBtn.addEventListener("click", async () => {
       document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       shareBtn.disabled = false;
-      shareBtn.innerHTML = '<span class="share-ico">✓</span> 保存しました';
-      setTimeout(() => { shareBtn.innerHTML = origLabel; }, 2500);
+      shareBtn.innerHTML = '<span class="share-x">✓</span><span class="share-txt">保存済</span>';
+      setTimeout(restore, 2500);
     }, "image/png");
   }catch(err){
     shareBtn.disabled = false;
-    shareBtn.innerHTML = '<span class="share-ico">⚠</span> 生成に失敗しました';
-    setTimeout(() => { shareBtn.innerHTML = origLabel; }, 2500);
+    shareBtn.innerHTML = '<span class="share-x">⚠</span><span class="share-txt">失敗</span>';
+    setTimeout(restore, 2500);
   }
 });
 window.addEventListener("popstate", () => {
