@@ -335,21 +335,23 @@
   .quick-share-btn:hover{background:var(--ink);color:var(--paper);}
   .quick-share-btn:disabled{opacity:.55;cursor:wait;}
 
-  /* ============ X共有カード(撮影用) ============ */
+  /* ============ X共有カード(撮影用・縦長雑誌レイアウト) ============ */
   #qShareWrap{
     position:fixed;left:-9999px;top:0;
-    width:1080px;height:1350px;pointer-events:none;
+    width:1080px;height:1920px;pointer-events:none;
   }
   #qShareCard{
-    width:1080px;height:1350px;
+    width:1080px;height:1920px;
     background:#1A1419;position:relative;
     font-family:"Shippori Mincho",serif;overflow:hidden;
+    color:#F4ECDD;
   }
   #qShareCard .sc-frame{
     position:absolute;inset:30px;
-    border:2px solid rgba(244,236,221,.20);
+    border:2px solid rgba(244,236,221,.18);
+    pointer-events:none;
   }
-  #qShareCard .sc-corner{position:absolute;width:44px;height:44px;z-index:3;}
+  #qShareCard .sc-corner{position:absolute;width:46px;height:46px;z-index:3;}
   #qShareCard .sc-corner::before,
   #qShareCard .sc-corner::after{content:"";position:absolute;background:#C9A664;}
   #qShareCard .sc-corner::before{width:100%;height:3px;}
@@ -366,68 +368,142 @@
   #qShareCard .sc-br::after{bottom:0;right:0;}
 
   #qShareCard .sc-header{
-    position:absolute;top:74px;left:0;right:0;
-    display:flex;align-items:center;justify-content:center;gap:20px;
+    position:absolute;top:90px;left:90px;right:90px;
+    display:flex;align-items:center;justify-content:space-between;
   }
   #qShareCard .sc-brand{
-    font-family:"Anton",sans-serif;font-size:62px;color:#F4ECDD;
+    font-family:"Anton",sans-serif;font-size:54px;color:#F4ECDD;line-height:1;
   }
   #qShareCard .sc-amp{
     font-family:"Fraunces",serif;font-weight:900;font-style:italic;
     color:#D8344A;margin:0 2px;
   }
   #qShareCard .sc-r18{
-    font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.1em;
-    color:#D8344A;border:2.5px solid #D8344A;
-    padding:5px 11px 2px;text-indent:.1em;
+    font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.12em;
+    color:#D8344A;border:3px solid #D8344A;
+    padding:8px 14px 4px;text-indent:.12em;line-height:1;
   }
   #qShareCard .sc-kicker{
-    position:absolute;top:150px;left:0;right:0;text-align:center;
-    font-family:"Anton",sans-serif;font-size:19px;letter-spacing:.34em;
-    color:#C9A664;text-indent:.34em;
+    position:absolute;top:172px;left:90px;right:90px;
+    display:flex;align-items:center;gap:18px;
+  }
+  #qShareCard .sc-kicker-line{flex:1;height:1px;background:rgba(201,166,100,.5);}
+  #qShareCard .sc-kicker-text{
+    font-family:"Anton",sans-serif;font-size:18px;letter-spacing:.32em;
+    color:#C9A664;text-indent:.32em;white-space:nowrap;
   }
 
+  /* メインビジュアル */
+  #qShareCard .sc-visual{
+    position:absolute;top:232px;left:80px;right:80px;height:920px;
+  }
   #qShareCard .sc-poster-wrap{
-    position:absolute;top:212px;left:50%;transform:translateX(-50%);
-    width:560px;height:560px;overflow:hidden;
-    border:1px solid rgba(201,166,100,.4);
+    position:absolute;inset:0;overflow:hidden;
+    background:#0A0710;
+    border:1px solid rgba(201,166,100,.35);
   }
   #qShareCard .sc-poster{
     width:100%;height:100%;
     object-fit:cover;object-position:right center;display:block;
   }
+  /* QUICKラベル(右上オーバーレイ) */
+  #qShareCard .sc-quick-badge{
+    position:absolute;top:30px;right:30px;
+    background:#D8344A;
+    padding:12px 22px 10px;
+    color:#F4ECDD;
+    box-shadow:8px 8px 0 rgba(0,0,0,.45);
+  }
+  #qShareCard .sc-quick-badge-top{
+    font-family:"Anton",sans-serif;
+    font-size:14px;letter-spacing:.28em;
+    text-indent:.28em;opacity:.85;
+  }
+  #qShareCard .sc-quick-badge-main{
+    font-family:"Anton",sans-serif;
+    font-size:38px;letter-spacing:.08em;line-height:1;
+    text-indent:.08em;margin-top:2px;
+  }
+  /* キャプション */
+  #qShareCard .sc-caption{
+    position:absolute;left:80px;right:80px;bottom:0;
+    background:linear-gradient(180deg, transparent, rgba(10,7,16,.92) 30%);
+    padding:60px 24px 22px;
+  }
+  #qShareCard .sc-code{
+    font-family:"Anton",sans-serif;
+    font-size:18px;letter-spacing:.22em;
+    color:#C9A664;text-indent:.22em;margin-bottom:6px;
+  }
+  #qShareCard .sc-actress{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:34px;letter-spacing:.02em;color:#F4ECDD;line-height:1.2;
+  }
+  #qShareCard .sc-studio{
+    font-family:"DM Sans",sans-serif;font-weight:400;
+    font-size:18px;letter-spacing:.1em;color:#A89889;margin-top:4px;
+  }
 
-  #qShareCard .sc-quicklabel{
-    position:absolute;top:812px;left:90px;right:90px;
-    display:flex;align-items:center;gap:18px;
+  /* タグチップ */
+  #qShareCard .sc-genre-row{
+    position:absolute;top:1185px;left:80px;right:80px;
+    display:flex;flex-wrap:wrap;gap:10px;
   }
-  #qShareCard .sc-quicklabel .ql-text{
-    font-family:"Anton",sans-serif;font-size:30px;letter-spacing:.16em;
-    color:#D8344A;text-indent:.16em;white-space:nowrap;
+  #qShareCard .sc-chip{
+    font-family:"DM Sans",sans-serif;font-weight:700;
+    font-size:18px;letter-spacing:.04em;color:#A89889;
+    padding:7px 16px 6px;border:1.5px solid rgba(168,152,137,.55);
   }
-  #qShareCard .sc-quicklabel .ql-line{
-    flex:1;height:2px;
-    background:linear-gradient(90deg,rgba(201,166,100,.6),transparent);
-  }
+  #qShareCard .sc-chip.is-accent{color:#C9A664;border-color:#C9A664;}
 
+  /* QUICK NOTE 引用カード */
+  #qShareCard .sc-memo-wrap{
+    position:absolute;top:1280px;left:80px;right:80px;
+    background:#F4ECDD;
+    padding:42px 56px 38px;
+    color:#1A1419;
+    box-shadow:10px 10px 0 #5B1F3B;
+  }
+  #qShareCard .sc-memo-label{
+    font-family:"Anton",sans-serif;
+    font-size:18px;letter-spacing:.28em;
+    color:#D8344A;text-indent:.28em;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:14px;
+  }
+  #qShareCard .sc-memo-label::before,
+  #qShareCard .sc-memo-label::after{
+    content:"";flex:1;height:1px;background:rgba(216,52,74,.4);
+  }
   #qShareCard .sc-memo{
-    position:absolute;top:880px;left:90px;right:90px;
     font-family:"Shippori Mincho",serif;font-weight:700;
-    font-size:36px;line-height:1.7;color:#F4ECDD;text-align:left;
+    font-size:30px;line-height:1.7;color:#1A1419;
+    text-align:justify;
   }
 
-  #qShareCard .sc-divider{
-    position:absolute;top:1218px;left:90px;right:90px;
-    display:flex;align-items:center;gap:16px;
+  /* フッター */
+  #qShareCard .sc-divider-bottom{
+    position:absolute;bottom:130px;left:80px;right:80px;
+    display:flex;align-items:center;gap:14px;
   }
-  #qShareCard .sc-d-line{flex:1;height:1px;background:rgba(201,166,100,.5);}
-  #qShareCard .sc-diamond{
+  #qShareCard .sc-divider-bottom .dl{
+    flex:1;height:1px;background:rgba(201,166,100,.4);
+  }
+  #qShareCard .sc-divider-bottom .dm{
     width:8px;height:8px;background:#C9A664;transform:rotate(45deg);
   }
-  #qShareCard .sc-meta{
-    position:absolute;top:1252px;left:90px;right:90px;text-align:center;
-    font-family:"Anton",sans-serif;font-size:21px;letter-spacing:.14em;
-    color:#A89889;text-indent:.14em;
+  #qShareCard .sc-footer{
+    position:absolute;bottom:80px;left:80px;right:80px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  #qShareCard .sc-foot-brand{
+    font-family:"Anton",sans-serif;
+    font-size:18px;letter-spacing:.22em;
+    color:#A89889;text-indent:.22em;
+  }
+  #qShareCard .sc-foot-est{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:16px;color:#A89889;
   }
 </style>
 </head>
@@ -592,7 +668,14 @@ async function generateQuickShareImage(q, btn){
   btn.innerHTML = "⏳ 生成中…";
 
   document.getElementById("qScMemo").textContent = q.memo;
-  document.getElementById("qScMeta").textContent = `${q.actress}　·　${q.code}`;
+  document.getElementById("qScCode").textContent = `${q.code}${q.date ? ' · ' + (q.date.split('-').slice(0,2).join('.')) : ''}`;
+  document.getElementById("qScActress").textContent = q.actress;
+  document.getElementById("qScStudio").textContent = q.studio;
+  // タグチップ(最大4個)
+  const tags = (q.tags || []).slice(0, 4);
+  document.getElementById("qScTags").innerHTML = tags.map((t, i) =>
+    `<span class="sc-chip${i === 0 ? ' is-accent' : ''}">#${t}</span>`
+  ).join("");
 
   const scImg = document.getElementById("qScImage");
   const proxyUrl = "/img?url=" + encodeURIComponent(q.packageImage);
@@ -606,7 +689,7 @@ async function generateQuickShareImage(q, btn){
 
   try{
     const canvas = await html2canvas(document.getElementById("qShareCard"), {
-      width: 1080, height: 1350, scale: 2,
+      width: 1080, height: 1920, scale: 2,
       backgroundColor: "#1A1419",
       useCORS: true, allowTaint: false, logging: false
     });
@@ -633,7 +716,7 @@ async function generateQuickShareImage(q, btn){
 
 renderQuicks();
 </script>
-<!-- ============ X共有カード(画面外・撮影用) ============ -->
+<!-- ============ X共有カード(画面外・撮影用・縦長雑誌レイアウト) ============ -->
 <div id="qShareWrap" aria-hidden="true">
   <div id="qShareCard">
     <div class="sc-frame"></div>
@@ -642,30 +725,52 @@ renderQuicks();
     <div class="sc-corner sc-bl"></div>
     <div class="sc-corner sc-br"></div>
 
+    <!-- ヘッダー -->
     <div class="sc-header">
       <div class="sc-brand">VELVET<span class="sc-amp">&amp;</span>PRESS</div>
       <div class="sc-r18">R18</div>
     </div>
-    <div class="sc-kicker">QUICK REVIEW — 編集後記</div>
-
-    <div class="sc-poster-wrap">
-      <img id="qScImage" class="sc-poster" src="" alt="">
+    <div class="sc-kicker">
+      <span class="sc-kicker-line"></span>
+      <span class="sc-kicker-text">QUICK REVIEW — 編集後記</span>
+      <span class="sc-kicker-line"></span>
     </div>
 
-    <div class="sc-quicklabel">
-      <span class="ql-text">QUICK NOTE</span>
-      <span class="ql-line"></span>
+    <!-- メインビジュアル -->
+    <div class="sc-visual">
+      <div class="sc-poster-wrap">
+        <img id="qScImage" class="sc-poster" src="" alt="">
+      </div>
+      <div class="sc-quick-badge">
+        <div class="sc-quick-badge-top">QUICK</div>
+        <div class="sc-quick-badge-main">NOTE</div>
+      </div>
+      <div class="sc-caption">
+        <div class="sc-code" id="qScCode"></div>
+        <div class="sc-actress" id="qScActress"></div>
+        <div class="sc-studio" id="qScStudio"></div>
+      </div>
     </div>
 
-    <div class="sc-memo" id="qScMemo"></div>
+    <!-- タグチップ -->
+    <div class="sc-genre-row" id="qScTags"></div>
 
-    <div class="sc-divider">
-      <span class="sc-d-line"></span>
-      <span class="sc-diamond"></span>
-      <span class="sc-d-line"></span>
+    <!-- QUICK NOTE 引用カード -->
+    <div class="sc-memo-wrap">
+      <div class="sc-memo-label">EDITOR'S NOTE</div>
+      <div class="sc-memo" id="qScMemo"></div>
     </div>
 
-    <div class="sc-meta" id="qScMeta"></div>
+    <!-- フッター -->
+    <div class="sc-divider-bottom">
+      <span class="dl"></span>
+      <span class="dm"></span>
+      <span class="dl"></span>
+    </div>
+    <div class="sc-footer">
+      <div class="sc-foot-brand">VELVET<span style="color:#D8344A;">&amp;</span>PRESS</div>
+      <div class="sc-foot-est">Est. 2026</div>
+    </div>
   </div>
 </div>
 
