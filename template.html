@@ -381,14 +381,14 @@
     text-indent:.14em;
   }
 
-  /* ============ X共有カード(撮影用・縦長雑誌レイアウト) ============ */
+  /* ============ X共有カード(撮影用・詳細ページ準拠レイアウト) ============ */
   #shareCardWrap{
     position:fixed;left:-9999px;top:0;
-    width:1080px;height:1920px;
+    width:1080px;height:1700px;
     pointer-events:none;
   }
   #shareCard{
-    width:1080px;height:1920px;
+    width:1080px;height:1700px;
     background:#1A1419;
     position:relative;
     font-family:"Shippori Mincho",serif;
@@ -422,9 +422,14 @@
   #shareCard .sc-br::before{bottom:0;right:0;}
   #shareCard .sc-br::after{bottom:0;right:0;}
 
+  /* 内容ラッパ(全体を縦に積む) */
+  #shareCard .sc-inner{
+    position:absolute;top:90px;left:90px;right:90px;bottom:80px;
+    display:flex;flex-direction:column;
+  }
+
   /* ヘッダー */
   #shareCard .sc-header{
-    position:absolute;top:90px;left:90px;right:90px;
     display:flex;align-items:center;justify-content:space-between;
   }
   #shareCard .sc-brand{
@@ -446,8 +451,8 @@
     text-indent:.12em;line-height:1;
   }
   #shareCard .sc-kicker{
-    position:absolute;top:172px;left:90px;right:90px;
     display:flex;align-items:center;gap:18px;
+    margin-top:18px;
   }
   #shareCard .sc-kicker-line{
     flex:1;height:1px;background:rgba(201,166,100,.5);
@@ -459,12 +464,14 @@
     text-indent:.32em;white-space:nowrap;
   }
 
-  /* メインビジュアル(画像 + スコアオーバーレイ) */
-  #shareCard .sc-visual{
-    position:absolute;top:232px;left:80px;right:80px;height:920px;
+  /* メイン横並び:ジャケット(左小) + スコア(右) */
+  #shareCard .sc-top{
+    display:flex;gap:34px;
+    margin-top:34px;
   }
   #shareCard .sc-poster-wrap{
-    position:absolute;inset:0;
+    flex:0 0 300px;
+    width:300px;height:430px;
     overflow:hidden;
     background:#0A0710;
     border:1px solid rgba(201,166,100,.35);
@@ -474,133 +481,132 @@
     object-fit:cover;object-position:right center;
     display:block;
   }
-  /* スコアカード(オーバーレイ・右上に大きく) */
-  #shareCard .sc-score-card{
-    position:absolute;top:30px;right:30px;
-    width:230px;
-    background:#F4ECDD;
-    padding:18px 22px 16px;
-    text-align:left;
-    box-shadow:8px 8px 0 rgba(0,0,0,.45);
+  #shareCard .sc-top-right{
+    flex:1;display:flex;flex-direction:column;
+    padding-top:6px;
   }
-  #shareCard .sc-score-label{
-    font-family:"Anton",sans-serif;
-    font-size:13px;letter-spacing:.28em;
-    color:#8E1F30;text-indent:.28em;
-    margin-bottom:4px;
+  /* スコア */
+  #shareCard .sc-score-block{
+    display:flex;align-items:baseline;gap:10px;
   }
   #shareCard .sc-score{
     font-family:"Anton",sans-serif;
-    color:#D8344A;line-height:.95;
-    display:flex;align-items:baseline;gap:6px;
+    color:#D8344A;line-height:.9;
+    display:flex;align-items:baseline;gap:8px;
   }
-  #shareCard .sc-score-num{font-size:106px;}
+  #shareCard .sc-score-num{font-size:128px;}
   #shareCard .sc-score-max{
-    font-size:24px;color:#5B1F3B;letter-spacing:.04em;
+    font-size:36px;color:#A89889;letter-spacing:.02em;
   }
   #shareCard .sc-score-out{
     font-family:"Anton",sans-serif;
-    font-size:14px;letter-spacing:.18em;
-    color:#5B1F3B;margin-top:-4px;
-    text-indent:.18em;
+    font-size:18px;letter-spacing:.2em;
+    color:#A89889;text-indent:.2em;
+    margin-top:2px;
   }
-
-  /* タイトル下部キャプション */
-  #shareCard .sc-caption{
-    position:absolute;left:80px;right:80px;
-    bottom:0;
-    background:linear-gradient(180deg, transparent, rgba(10,7,16,.92) 30%);
-    padding:60px 24px 22px;
+  /* 品番・女優・メーカー */
+  #shareCard .sc-meta{
+    margin-top:30px;
   }
   #shareCard .sc-code{
     font-family:"Anton",sans-serif;
-    font-size:18px;letter-spacing:.22em;
-    color:#C9A664;text-indent:.22em;
-    margin-bottom:6px;
+    font-size:20px;letter-spacing:.2em;
+    color:#C9A664;text-indent:.2em;
+    margin-bottom:10px;
   }
   #shareCard .sc-actress{
     font-family:"Shippori Mincho",serif;font-weight:800;
-    font-size:34px;letter-spacing:.02em;color:#F4ECDD;
-    line-height:1.2;
+    font-size:40px;letter-spacing:.02em;color:#F4ECDD;
+    line-height:1.25;
   }
   #shareCard .sc-studio{
     font-family:"DM Sans",sans-serif;font-weight:400;
-    font-size:18px;letter-spacing:.1em;color:#A89889;
-    margin-top:4px;
+    font-size:19px;letter-spacing:.08em;color:#A89889;
+    margin-top:8px;
   }
 
   /* ジャンルチップ */
   #shareCard .sc-genre-row{
-    position:absolute;top:1185px;left:80px;right:80px;
     display:flex;flex-wrap:wrap;gap:10px;
+    margin-top:30px;
   }
   #shareCard .sc-chip{
     font-family:"DM Sans",sans-serif;font-weight:700;
-    font-size:18px;letter-spacing:.04em;
-    color:#A89889;
-    padding:7px 16px 6px;
-    border:1.5px solid rgba(168,152,137,.55);
-  }
-  #shareCard .sc-chip.is-accent{
-    color:#C9A664;border-color:#C9A664;
+    font-size:19px;letter-spacing:.04em;
+    color:#C9A664;
+    padding:8px 18px 7px;
+    border:1.5px solid #C9A664;
   }
 
-  /* verdict(雑誌風引用カード) */
+  /* verdict引用カード */
   #shareCard .sc-verdict-wrap{
-    position:absolute;top:1280px;left:80px;right:80px;
     background:#F4ECDD;
-    padding:42px 56px 38px;
+    padding:40px 52px 34px;
     color:#1A1419;
     box-shadow:10px 10px 0 #5B1F3B;
+    margin-top:36px;
   }
   #shareCard .sc-verdict-mark{
     font-family:"Fraunces",serif;
     font-style:italic;font-weight:900;
-    font-size:78px;line-height:.6;
+    font-size:72px;line-height:.5;
     color:#D8344A;
-    margin-bottom:4px;
+    margin-bottom:14px;
   }
   #shareCard .sc-verdict-text{
     font-family:"Shippori Mincho",serif;font-weight:800;
-    font-size:34px;line-height:1.55;
+    font-size:38px;line-height:1.5;
     color:#1A1419;
   }
   #shareCard .sc-verdict-cap{
     margin-top:18px;
     font-family:"Anton",sans-serif;
-    font-size:14px;letter-spacing:.32em;
+    font-size:15px;letter-spacing:.32em;
     color:#8E1F30;text-indent:.32em;
   }
 
-  /* リード文(ドロップキャップ付き) */
+  /* 本文(ドロップキャップ + 2段落・全幅) */
+  #shareCard .sc-prose{
+    flex:1;
+    margin-top:34px;
+    overflow:hidden;
+  }
   #shareCard .sc-lead{
-    position:absolute;top:1565px;left:80px;right:80px;
-    bottom:170px;
     font-family:"Shippori Mincho",serif;
-    font-size:23px;line-height:1.85;
+    font-size:24px;line-height:1.8;
     color:#E8DCC8;
     text-align:justify;
-    overflow:hidden;
   }
   #shareCard .sc-dropcap{
     font-family:"Shippori Mincho",serif;font-weight:800;
-    font-size:96px;color:#D8344A;
-    float:left;line-height:.85;
-    margin:8px 16px -6px 0;
-    padding:0;
+    font-size:90px;color:#D8344A;
+    float:left;line-height:.82;
+    margin:8px 18px -6px 0;
   }
   #shareCard .sc-body{
-    margin-top:18px;
+    margin-top:20px;
     font-family:"Shippori Mincho",serif;
-    font-size:20px;line-height:1.85;
-    color:#C9B89D;
+    font-size:21px;line-height:1.8;
+    color:#D2C3A8;
     text-align:justify;
   }
+  #shareCard .sc-body + .sc-body{margin-top:16px;}
 
   /* フッター */
+  #shareCard .sc-divider-bottom{
+    display:flex;align-items:center;gap:14px;
+    margin-top:auto;
+  }
+  #shareCard .sc-divider-bottom .dl{
+    flex:1;height:1px;background:rgba(201,166,100,.4);
+  }
+  #shareCard .sc-divider-bottom .dm{
+    width:8px;height:8px;background:#C9A664;
+    transform:rotate(45deg);
+  }
   #shareCard .sc-footer{
-    position:absolute;bottom:80px;left:80px;right:80px;
     display:flex;align-items:center;justify-content:space-between;
+    margin-top:24px;
   }
   #shareCard .sc-foot-brand{
     font-family:"Anton",sans-serif;
@@ -610,17 +616,6 @@
   #shareCard .sc-foot-est{
     font-family:"Fraunces",serif;font-style:italic;
     font-size:16px;color:#A89889;
-  }
-  #shareCard .sc-divider-bottom{
-    position:absolute;bottom:130px;left:80px;right:80px;
-    display:flex;align-items:center;gap:14px;
-  }
-  #shareCard .sc-divider-bottom .dl{
-    flex:1;height:1px;background:rgba(201,166,100,.4);
-  }
-  #shareCard .sc-divider-bottom .dm{
-    width:8px;height:8px;background:#C9A664;
-    transform:rotate(45deg);
   }
 
   .detail-back{
@@ -1003,7 +998,7 @@
   </div>
 </section>
 
-<!-- ============ X共有カード(画面外・撮影用・縦長雑誌レイアウト) ============ -->
+<!-- ============ X共有カード(画面外・撮影用・詳細ページ準拠レイアウト) ============ -->
 <div id="shareCardWrap" aria-hidden="true">
   <div id="shareCard">
     <div class="sc-frame"></div>
@@ -1012,59 +1007,60 @@
     <div class="sc-corner sc-bl"></div>
     <div class="sc-corner sc-br"></div>
 
-    <!-- ヘッダー -->
-    <div class="sc-header">
-      <div class="sc-brand">VELVET<span class="sc-amp">&amp;</span>PRESS</div>
-      <div class="sc-r18">R18</div>
-    </div>
-    <div class="sc-kicker">
-      <span class="sc-kicker-line"></span>
-      <span class="sc-kicker-text">AFTER-HOURS REVIEW MAGAZINE</span>
-      <span class="sc-kicker-line"></span>
-    </div>
-
-    <!-- メインビジュアル -->
-    <div class="sc-visual">
-      <div class="sc-poster-wrap">
-        <img id="scImage" class="sc-poster" src="" alt="">
+    <div class="sc-inner">
+      <!-- ヘッダー -->
+      <div class="sc-header">
+        <div class="sc-brand">VELVET<span class="sc-amp">&amp;</span>PRESS</div>
+        <div class="sc-r18">R18</div>
       </div>
-      <div class="sc-score-card">
-        <div class="sc-score-label">SCORE</div>
-        <div class="sc-score">
-          <span class="sc-score-num" id="scScoreNum">95</span>
-          <span class="sc-score-max">/100</span>
+      <div class="sc-kicker">
+        <span class="sc-kicker-line"></span>
+        <span class="sc-kicker-text">AFTER-HOURS REVIEW MAGAZINE</span>
+        <span class="sc-kicker-line"></span>
+      </div>
+
+      <!-- ジャケット(左小) + スコア・情報(右) -->
+      <div class="sc-top">
+        <div class="sc-poster-wrap">
+          <img id="scImage" class="sc-poster" src="" alt="">
         </div>
-        <div class="sc-score-out">OUT OF 100</div>
+        <div class="sc-top-right">
+          <div class="sc-score">
+            <span class="sc-score-num" id="scScoreNum">95</span>
+            <span class="sc-score-max">/100</span>
+          </div>
+          <div class="sc-score-out">OUT OF 100</div>
+          <div class="sc-meta">
+            <div class="sc-code" id="scCode">SNOS-166 · 2026</div>
+            <div class="sc-actress" id="scActress">女優名</div>
+            <div class="sc-studio" id="scStudio">メーカー</div>
+          </div>
+        </div>
       </div>
-      <div class="sc-caption">
-        <div class="sc-code" id="scCode">SNOS-166 · 2026</div>
-        <div class="sc-actress" id="scActress">女優名</div>
-        <div class="sc-studio" id="scStudio">メーカー</div>
+
+      <!-- ジャンルチップ -->
+      <div class="sc-genre-row" id="scGenres"></div>
+
+      <!-- verdict引用カード -->
+      <div class="sc-verdict-wrap">
+        <div class="sc-verdict-mark">&ldquo;</div>
+        <div class="sc-verdict-text" id="scVerdict"></div>
+        <div class="sc-verdict-cap">EDITOR'S TAKE</div>
       </div>
-    </div>
 
-    <!-- ジャンルチップ -->
-    <div class="sc-genre-row" id="scGenres"></div>
+      <!-- 本文(リード + 2段落) -->
+      <div class="sc-prose" id="scProse"></div>
 
-    <!-- verdict引用カード -->
-    <div class="sc-verdict-wrap">
-      <div class="sc-verdict-mark">&ldquo;</div>
-      <div class="sc-verdict-text" id="scVerdict"></div>
-      <div class="sc-verdict-cap">EDITOR'S TAKE</div>
-    </div>
-
-    <!-- リード文 + 本文 -->
-    <div class="sc-lead" id="scLead"></div>
-
-    <!-- フッター -->
-    <div class="sc-divider-bottom">
-      <span class="dl"></span>
-      <span class="dm"></span>
-      <span class="dl"></span>
-    </div>
-    <div class="sc-footer">
-      <div class="sc-foot-brand">VELVET<span style="color:#D8344A;">&amp;</span>PRESS</div>
-      <div class="sc-foot-est">Est. 2026</div>
+      <!-- フッター -->
+      <div class="sc-divider-bottom">
+        <span class="dl"></span>
+        <span class="dm"></span>
+        <span class="dl"></span>
+      </div>
+      <div class="sc-footer">
+        <div class="sc-foot-brand">VELVET<span style="color:#D8344A;">&amp;</span>PRESS</div>
+        <div class="sc-foot-est">Est. 2026</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1331,21 +1327,20 @@ document.addEventListener("click", async (e) => {
   document.getElementById("scCode").textContent = `${f.code} · ${f.year}`;
   document.getElementById("scActress").textContent = f.actress;
   document.getElementById("scStudio").textContent = f.studio;
-  // ジャンルチップ(最大4個、1個目をアクセント)
+  // ジャンルチップ(最大4個)
   const genres = (f.genre || []).slice(0, 4);
-  document.getElementById("scGenres").innerHTML = genres.map((g, i) =>
-    `<span class="sc-chip${i === 0 ? ' is-accent' : ''}">#${g}</span>`
+  document.getElementById("scGenres").innerHTML = genres.map((g) =>
+    `<span class="sc-chip">#${g}</span>`
   ).join("");
-  // リード文(長すぎる場合は適度に省略 + ドロップキャップ分割) + 本文1
-  let leadText = f.lead || "";
-  if(leadText.length > 140) leadText = leadText.slice(0, 138) + "…";
+  // 本文(リード全文 + body全文 / ドロップキャップ付き)
+  const leadText = f.lead || "";
   const firstChar = leadText.charAt(0);
   const restText = leadText.slice(1);
-  let bodyText = (f.body && f.body[0]) ? f.body[0] : "";
-  if(bodyText.length > 110) bodyText = bodyText.slice(0, 108) + "…";
-  document.getElementById("scLead").innerHTML =
-    `<span class="sc-dropcap">${firstChar}</span>${restText}` +
-    (bodyText ? `<div class="sc-body">${bodyText}</div>` : "");
+  const bodyParas = (f.body || []).filter(Boolean)
+    .map(b => `<div class="sc-body">${b}</div>`).join("");
+  document.getElementById("scProse").innerHTML =
+    `<div class="sc-lead"><span class="sc-dropcap">${firstChar}</span>${restText}</div>` +
+    bodyParas;
 
   const scImg = document.getElementById("scImage");
 
@@ -1366,7 +1361,7 @@ document.addEventListener("click", async (e) => {
 
   try{
     const canvas = await html2canvas(document.getElementById("shareCard"), {
-      width: 1080, height: 1920, scale: 2,
+      width: 1080, height: 1700, scale: 2,
       backgroundColor: "#1A1419",
       useCORS: true, allowTaint: false, logging: false
     });
