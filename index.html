@@ -475,20 +475,28 @@
     overflow:hidden;
     background:#0A0710;
     border:1px solid rgba(201,166,100,.35);
+    align-self:flex-start;
+    margin-top:24px;
   }
+  /* DMM横長ジャケット(約3:2)の右半分のみを縦長枠に表示 */
   #shareCard .sc-poster{
-    width:100%;height:100%;
-    object-fit:cover;object-position:right center;
+    height:100%;
+    width:auto;
     display:block;
+    /* 画像を枠の高さに合わせ、右半分(表ジャケット)が見えるよう右端基準で配置 */
+    object-fit:cover;
+    object-position:100% center;
+    /* 横長画像のアスペクト比3:2を考慮し、枠幅300pxに対して画像を約645px幅で表示
+       → 右端300pxだけが見える(画像の右半分が枠を埋める) */
+    min-width:645px;
+    margin-left:-345px;
   }
   #shareCard .sc-top-right{
     flex:1;display:flex;flex-direction:column;
     padding-top:6px;
+    min-width:0;
   }
   /* スコア */
-  #shareCard .sc-score-block{
-    display:flex;align-items:baseline;gap:10px;
-  }
   #shareCard .sc-score{
     font-family:"Anton",sans-serif;
     color:#D8344A;line-height:.9;
@@ -504,25 +512,33 @@
     color:#A89889;text-indent:.2em;
     margin-top:2px;
   }
-  /* 品番・女優・メーカー */
-  #shareCard .sc-meta{
-    margin-top:30px;
+  /* タイトル(フルタイトル・スコア下) */
+  #shareCard .sc-title{
+    margin-top:22px;
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:23px;line-height:1.55;
+    color:#E8DCC8;
+    letter-spacing:.01em;
   }
-  #shareCard .sc-code{
-    font-family:"Anton",sans-serif;
-    font-size:20px;letter-spacing:.2em;
-    color:#C9A664;text-indent:.2em;
-    margin-bottom:10px;
+  /* 女優・メーカー・品番(タイトル下) */
+  #shareCard .sc-meta{
+    margin-top:22px;
   }
   #shareCard .sc-actress{
     font-family:"Shippori Mincho",serif;font-weight:800;
-    font-size:40px;letter-spacing:.02em;color:#F4ECDD;
+    font-size:32px;letter-spacing:.02em;color:#F4ECDD;
     line-height:1.25;
   }
   #shareCard .sc-studio{
     font-family:"DM Sans",sans-serif;font-weight:400;
-    font-size:19px;letter-spacing:.08em;color:#A89889;
-    margin-top:8px;
+    font-size:17px;letter-spacing:.08em;color:#A89889;
+    margin-top:6px;
+  }
+  #shareCard .sc-code{
+    font-family:"Anton",sans-serif;
+    font-size:18px;letter-spacing:.2em;
+    color:#C9A664;text-indent:.2em;
+    margin-top:10px;
   }
 
   /* ジャンルチップ */
@@ -1019,7 +1035,7 @@
         <span class="sc-kicker-line"></span>
       </div>
 
-      <!-- ジャケット(左小) + スコア・情報(右) -->
+      <!-- ジャケット(左小・右半分表示) + スコア・情報(右) -->
       <div class="sc-top">
         <div class="sc-poster-wrap">
           <img id="scImage" class="sc-poster" src="" alt="">
@@ -1030,10 +1046,11 @@
             <span class="sc-score-max">/100</span>
           </div>
           <div class="sc-score-out">OUT OF 100</div>
+          <div class="sc-title" id="scTitle"></div>
           <div class="sc-meta">
-            <div class="sc-code" id="scCode">SNOS-166 · 2026</div>
             <div class="sc-actress" id="scActress">女優名</div>
             <div class="sc-studio" id="scStudio">メーカー</div>
+            <div class="sc-code" id="scCode">SNOS-166 · 2026</div>
           </div>
         </div>
       </div>
@@ -1513,6 +1530,10 @@ document.addEventListener("click", async (e) => {
   // カードにデータを流し込む
   document.getElementById("scScoreNum").textContent = f.score;
   document.getElementById("scVerdict").textContent = f.verdict;
+  // タイトル(長い場合は省略)
+  let titleText = f.title || "";
+  if(titleText.length > 60) titleText = titleText.slice(0, 58) + "…";
+  document.getElementById("scTitle").textContent = titleText;
   document.getElementById("scCode").textContent = `${f.code} · ${f.year}`;
   document.getElementById("scActress").textContent = f.actress;
   document.getElementById("scStudio").textContent = f.studio;
